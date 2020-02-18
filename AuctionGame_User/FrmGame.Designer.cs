@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pboxClose = new System.Windows.Forms.PictureBox();
+            this.pboxCloseForm = new System.Windows.Forms.PictureBox();
             this.txbTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -54,22 +54,19 @@
             this.label12 = new System.Windows.Forms.Label();
             this.lblNameProduct = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pnlProductsByFamily = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxClose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxCloseForm)).BeginInit();
             this.panel2.SuspendLayout();
             this.pnlProductInformation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxCloseProductInformation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxProduct)).BeginInit();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(44)))), ((int)(((byte)(66)))));
-            this.panel1.Controls.Add(this.pboxClose);
+            this.panel1.Controls.Add(this.pboxCloseForm);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -77,16 +74,16 @@
             this.panel1.TabIndex = 0;
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             // 
-            // pboxClose
+            // pboxCloseForm
             // 
-            this.pboxClose.Image = global::AuctionGame_User.Properties.Resources.cerrar;
-            this.pboxClose.Location = new System.Drawing.Point(1001, 8);
-            this.pboxClose.Name = "pboxClose";
-            this.pboxClose.Size = new System.Drawing.Size(15, 15);
-            this.pboxClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pboxClose.TabIndex = 0;
-            this.pboxClose.TabStop = false;
-            this.pboxClose.Click += new System.EventHandler(this.pboxClose_Click);
+            this.pboxCloseForm.Image = global::AuctionGame_User.Properties.Resources.cerrar;
+            this.pboxCloseForm.Location = new System.Drawing.Point(1001, 8);
+            this.pboxCloseForm.Name = "pboxCloseForm";
+            this.pboxCloseForm.Size = new System.Drawing.Size(15, 15);
+            this.pboxCloseForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pboxCloseForm.TabIndex = 0;
+            this.pboxCloseForm.TabStop = false;
+            this.pboxCloseForm.Click += new System.EventHandler(this.pboxCloseForm_Click);
             // 
             // txbTime
             // 
@@ -309,14 +306,15 @@
             // 
             // pboxCloseProductInformation
             // 
+            this.pboxCloseProductInformation.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pboxCloseProductInformation.Image = global::AuctionGame_User.Properties.Resources.espalda;
-            this.pboxCloseProductInformation.Location = new System.Drawing.Point(106, 349);
+            this.pboxCloseProductInformation.Location = new System.Drawing.Point(0, 355);
             this.pboxCloseProductInformation.Name = "pboxCloseProductInformation";
-            this.pboxCloseProductInformation.Size = new System.Drawing.Size(30, 30);
+            this.pboxCloseProductInformation.Size = new System.Drawing.Size(141, 30);
             this.pboxCloseProductInformation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pboxCloseProductInformation.TabIndex = 7;
             this.pboxCloseProductInformation.TabStop = false;
-            this.pboxCloseProductInformation.Click += new System.EventHandler(this.pboxCloseProductInformation_Click);
+            this.pboxCloseProductInformation.Click += new System.EventHandler(this.pboxClose_Click);
             // 
             // pboxProduct
             // 
@@ -393,26 +391,16 @@
             this.label10.TabIndex = 0;
             this.label10.Text = "Nombre";
             // 
-            // panel4
+            // pnlProductsByFamily
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(116)))), ((int)(((byte)(149)))));
-            this.panel4.Controls.Add(this.pictureBox1);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(735, 100);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(141, 385);
-            this.panel4.TabIndex = 7;
-            this.panel4.Visible = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::AuctionGame_User.Properties.Resources.proximo;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 349);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.pnlProductsByFamily.AutoScroll = true;
+            this.pnlProductsByFamily.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(116)))), ((int)(((byte)(149)))));
+            this.pnlProductsByFamily.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlProductsByFamily.Location = new System.Drawing.Point(735, 100);
+            this.pnlProductsByFamily.Name = "pnlProductsByFamily";
+            this.pnlProductsByFamily.Size = new System.Drawing.Size(141, 385);
+            this.pnlProductsByFamily.TabIndex = 7;
+            this.pnlProductsByFamily.Visible = false;
             // 
             // FrmGame
             // 
@@ -420,7 +408,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(76)))), ((int)(((byte)(100)))));
             this.ClientSize = new System.Drawing.Size(1026, 565);
-            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.pnlProductsByFamily);
             this.Controls.Add(this.pnlProductInformation);
             this.Controls.Add(this.pnlFamilies);
             this.Controls.Add(this.pnlProducts);
@@ -432,15 +420,13 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FrmGame_Load);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pboxClose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxCloseForm)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.pnlProductInformation.ResumeLayout(false);
             this.pnlProductInformation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxCloseProductInformation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxProduct)).EndInit();
-            this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -448,7 +434,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pboxClose;
+        private System.Windows.Forms.PictureBox pboxCloseForm;
         private System.Windows.Forms.Label txbTime;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label6;
@@ -472,8 +458,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox pboxProduct;
         private System.Windows.Forms.PictureBox pboxCloseProductInformation;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel pnlProductsByFamily;
     }
 }
 
