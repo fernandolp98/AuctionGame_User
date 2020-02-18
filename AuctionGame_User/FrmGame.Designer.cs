@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pboxClose = new System.Windows.Forms.PictureBox();
             this.txbTime = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
@@ -43,23 +44,26 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel3 = new System.Windows.Forms.Panel();
             this.pnlProducts = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pnlFamilies = new System.Windows.Forms.Panel();
             this.pnlProductInformation = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.lblNameProduct = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.lblInitialPrice = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.lblPointsProduct = new System.Windows.Forms.Label();
             this.pboxCloseProductInformation = new System.Windows.Forms.PictureBox();
             this.pboxProduct = new System.Windows.Forms.PictureBox();
-            this.pboxClose = new System.Windows.Forms.PictureBox();
+            this.lblPointsProduct = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblInitialPrice = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lblNameProduct = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxClose)).BeginInit();
             this.panel2.SuspendLayout();
             this.pnlProductInformation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxCloseProductInformation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxProduct)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxClose)).BeginInit();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -73,6 +77,17 @@
             this.panel1.TabIndex = 0;
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             // 
+            // pboxClose
+            // 
+            this.pboxClose.Image = global::AuctionGame_User.Properties.Resources.cerrar;
+            this.pboxClose.Location = new System.Drawing.Point(1001, 8);
+            this.pboxClose.Name = "pboxClose";
+            this.pboxClose.Size = new System.Drawing.Size(15, 15);
+            this.pboxClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pboxClose.TabIndex = 0;
+            this.pboxClose.TabStop = false;
+            this.pboxClose.Click += new System.EventHandler(this.pboxClose_Click);
+            // 
             // txbTime
             // 
             this.txbTime.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -81,11 +96,11 @@
             this.txbTime.AutoSize = true;
             this.txbTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txbTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txbTime.Font = new System.Drawing.Font("DS-Digital", 42F, System.Drawing.FontStyle.Bold);
+            this.txbTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 42F, System.Drawing.FontStyle.Bold);
             this.txbTime.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.txbTime.Location = new System.Drawing.Point(431, 6);
             this.txbTime.Name = "txbTime";
-            this.txbTime.Size = new System.Drawing.Size(154, 58);
+            this.txbTime.Size = new System.Drawing.Size(175, 66);
             this.txbTime.TabIndex = 0;
             this.txbTime.Text = "00:00";
             // 
@@ -183,11 +198,11 @@
             this.label5.AutoSize = true;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label5.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Yellow;
             this.label5.Location = new System.Drawing.Point(859, 3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(116, 28);
+            this.label5.Size = new System.Drawing.Size(122, 28);
             this.label5.TabIndex = 4;
             this.label5.Text = "Puntos";
             // 
@@ -199,11 +214,11 @@
             this.label4.AutoSize = true;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label4.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Yellow;
             this.label4.Location = new System.Drawing.Point(645, 6);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 28);
+            this.label4.Size = new System.Drawing.Size(122, 28);
             this.label4.TabIndex = 3;
             this.label4.Text = "Dinero";
             // 
@@ -215,11 +230,11 @@
             this.label3.AutoSize = true;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Yellow;
             this.label3.Location = new System.Drawing.Point(217, 6);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 28);
+            this.label3.Size = new System.Drawing.Size(104, 28);
             this.label3.TabIndex = 2;
             this.label3.Text = "Round";
             // 
@@ -231,11 +246,11 @@
             this.label2.AutoSize = true;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Yellow;
             this.label2.Location = new System.Drawing.Point(3, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(133, 28);
+            this.label2.Size = new System.Drawing.Size(140, 28);
             this.label2.TabIndex = 1;
             this.label2.Text = "Subasta";
             // 
@@ -265,14 +280,14 @@
             this.pnlProducts.Size = new System.Drawing.Size(150, 385);
             this.pnlProducts.TabIndex = 4;
             // 
-            // panel4
+            // pnlFamilies
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(59)))), ((int)(((byte)(92)))));
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(876, 100);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(150, 385);
-            this.panel4.TabIndex = 5;
+            this.pnlFamilies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(59)))), ((int)(((byte)(92)))));
+            this.pnlFamilies.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlFamilies.Location = new System.Drawing.Point(876, 100);
+            this.pnlFamilies.Name = "pnlFamilies";
+            this.pnlFamilies.Size = new System.Drawing.Size(150, 385);
+            this.pnlFamilies.TabIndex = 5;
             // 
             // pnlProductInformation
             // 
@@ -291,72 +306,6 @@
             this.pnlProductInformation.Size = new System.Drawing.Size(141, 385);
             this.pnlProductInformation.TabIndex = 6;
             this.pnlProductInformation.Visible = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.Yellow;
-            this.label10.Location = new System.Drawing.Point(16, 181);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(79, 24);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Nombre";
-            // 
-            // lblNameProduct
-            // 
-            this.lblNameProduct.AutoSize = true;
-            this.lblNameProduct.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNameProduct.ForeColor = System.Drawing.Color.Snow;
-            this.lblNameProduct.Location = new System.Drawing.Point(16, 210);
-            this.lblNameProduct.Name = "lblNameProduct";
-            this.lblNameProduct.Size = new System.Drawing.Size(17, 23);
-            this.lblNameProduct.TabIndex = 1;
-            this.lblNameProduct.Text = "-";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.Yellow;
-            this.label12.Location = new System.Drawing.Point(16, 238);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(116, 24);
-            this.label12.TabIndex = 2;
-            this.label12.Text = "Precio Inicial";
-            // 
-            // lblInitialPrice
-            // 
-            this.lblInitialPrice.AutoSize = true;
-            this.lblInitialPrice.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInitialPrice.ForeColor = System.Drawing.Color.Snow;
-            this.lblInitialPrice.Location = new System.Drawing.Point(16, 267);
-            this.lblInitialPrice.Name = "lblInitialPrice";
-            this.lblInitialPrice.Size = new System.Drawing.Size(17, 23);
-            this.lblInitialPrice.TabIndex = 3;
-            this.lblInitialPrice.Text = "-";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Yellow;
-            this.label14.Location = new System.Drawing.Point(16, 295);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(68, 24);
-            this.label14.TabIndex = 4;
-            this.label14.Text = "Puntos";
-            // 
-            // lblPointsProduct
-            // 
-            this.lblPointsProduct.AutoSize = true;
-            this.lblPointsProduct.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPointsProduct.ForeColor = System.Drawing.Color.Snow;
-            this.lblPointsProduct.Location = new System.Drawing.Point(16, 324);
-            this.lblPointsProduct.Name = "lblPointsProduct";
-            this.lblPointsProduct.Size = new System.Drawing.Size(17, 23);
-            this.lblPointsProduct.TabIndex = 5;
-            this.lblPointsProduct.Text = "-";
             // 
             // pboxCloseProductInformation
             // 
@@ -378,16 +327,92 @@
             this.pboxProduct.TabIndex = 6;
             this.pboxProduct.TabStop = false;
             // 
-            // pboxClose
+            // lblPointsProduct
             // 
-            this.pboxClose.Image = global::AuctionGame_User.Properties.Resources.cerrar;
-            this.pboxClose.Location = new System.Drawing.Point(1001, 8);
-            this.pboxClose.Name = "pboxClose";
-            this.pboxClose.Size = new System.Drawing.Size(15, 15);
-            this.pboxClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pboxClose.TabIndex = 0;
-            this.pboxClose.TabStop = false;
-            this.pboxClose.Click += new System.EventHandler(this.pboxClose_Click);
+            this.lblPointsProduct.AutoSize = true;
+            this.lblPointsProduct.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPointsProduct.ForeColor = System.Drawing.Color.Snow;
+            this.lblPointsProduct.Location = new System.Drawing.Point(16, 324);
+            this.lblPointsProduct.Name = "lblPointsProduct";
+            this.lblPointsProduct.Size = new System.Drawing.Size(17, 23);
+            this.lblPointsProduct.TabIndex = 5;
+            this.lblPointsProduct.Text = "-";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Yellow;
+            this.label14.Location = new System.Drawing.Point(16, 295);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(68, 24);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "Puntos";
+            // 
+            // lblInitialPrice
+            // 
+            this.lblInitialPrice.AutoSize = true;
+            this.lblInitialPrice.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInitialPrice.ForeColor = System.Drawing.Color.Snow;
+            this.lblInitialPrice.Location = new System.Drawing.Point(16, 267);
+            this.lblInitialPrice.Name = "lblInitialPrice";
+            this.lblInitialPrice.Size = new System.Drawing.Size(17, 23);
+            this.lblInitialPrice.TabIndex = 3;
+            this.lblInitialPrice.Text = "-";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Yellow;
+            this.label12.Location = new System.Drawing.Point(16, 238);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(116, 24);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "Precio Inicial";
+            // 
+            // lblNameProduct
+            // 
+            this.lblNameProduct.AutoSize = true;
+            this.lblNameProduct.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameProduct.ForeColor = System.Drawing.Color.Snow;
+            this.lblNameProduct.Location = new System.Drawing.Point(16, 210);
+            this.lblNameProduct.Name = "lblNameProduct";
+            this.lblNameProduct.Size = new System.Drawing.Size(17, 23);
+            this.lblNameProduct.TabIndex = 1;
+            this.lblNameProduct.Text = "-";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Yellow;
+            this.label10.Location = new System.Drawing.Point(16, 181);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(79, 24);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Nombre";
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(116)))), ((int)(((byte)(149)))));
+            this.panel4.Controls.Add(this.pictureBox1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(735, 100);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(141, 385);
+            this.panel4.TabIndex = 7;
+            this.panel4.Visible = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::AuctionGame_User.Properties.Resources.proximo;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 349);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
             // 
             // FrmGame
             // 
@@ -395,8 +420,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(76)))), ((int)(((byte)(100)))));
             this.ClientSize = new System.Drawing.Size(1026, 565);
-            this.Controls.Add(this.pnlProductInformation);
             this.Controls.Add(this.panel4);
+            this.Controls.Add(this.pnlProductInformation);
+            this.Controls.Add(this.pnlFamilies);
             this.Controls.Add(this.pnlProducts);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -406,13 +432,15 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FrmGame_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pboxClose)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.pnlProductInformation.ResumeLayout(false);
             this.pnlProductInformation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxCloseProductInformation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxProduct)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxClose)).EndInit();
+            this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -434,7 +462,7 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel pnlProducts;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel pnlFamilies;
         private System.Windows.Forms.Panel pnlProductInformation;
         private System.Windows.Forms.Label lblPointsProduct;
         private System.Windows.Forms.Label label14;
@@ -444,6 +472,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox pboxProduct;
         private System.Windows.Forms.PictureBox pboxCloseProductInformation;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
