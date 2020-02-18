@@ -63,6 +63,36 @@ namespace AuctionGame_User.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bajar {
+            get {
+                object obj = ResourceManager.GetObject("bajar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bajar_2_ {
+            get {
+                object obj = ResourceManager.GetObject("bajar(2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bajar_2_1 {
+            get {
+                object obj = ResourceManager.GetObject("bajar(2)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cerrar {
             get {
                 object obj = ResourceManager.GetObject("cerrar", resourceCulture);
@@ -106,6 +136,26 @@ namespace AuctionGame_User.Properties {
         internal static System.Drawing.Bitmap subasta {
             get {
                 object obj = ResourceManager.GetObject("subasta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap subir {
+            get {
+                object obj = ResourceManager.GetObject("subir", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap subir_2_ {
+            get {
+                object obj = ResourceManager.GetObject("subir(2)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
