@@ -96,11 +96,11 @@
             this.txbTime.AutoSize = true;
             this.txbTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txbTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txbTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 42F, System.Drawing.FontStyle.Bold);
+            this.txbTime.Font = new System.Drawing.Font("DS-Digital", 42F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbTime.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.txbTime.Location = new System.Drawing.Point(431, 6);
             this.txbTime.Name = "txbTime";
-            this.txbTime.Size = new System.Drawing.Size(175, 66);
+            this.txbTime.Size = new System.Drawing.Size(154, 58);
             this.txbTime.TabIndex = 0;
             this.txbTime.Text = "00:00";
             // 
