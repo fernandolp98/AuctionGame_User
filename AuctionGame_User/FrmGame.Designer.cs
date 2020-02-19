@@ -29,22 +29,36 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmGame));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txbTime = new System.Windows.Forms.Label();
+            this.pboxCloseForm = new System.Windows.Forms.PictureBox();
+            this.txbClock = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblPoints = new System.Windows.Forms.Label();
+            this.lblMoney = new System.Windows.Forms.Label();
+            this.lblRoundNumber = new System.Windows.Forms.Label();
+            this.lblAuctionNumber = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timerAuction = new System.Windows.Forms.Timer(this.components);
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pboxPlay = new System.Windows.Forms.PictureBox();
+            this.pboxDecrementValueOffer = new System.Windows.Forms.PictureBox();
+            this.pboxIncreaseValueOffer = new System.Windows.Forms.PictureBox();
+            this.pboDecrementBid = new System.Windows.Forms.PictureBox();
+            this.pboxIncreaseBid = new System.Windows.Forms.PictureBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pboxBid = new System.Windows.Forms.PictureBox();
             this.pnlProducts = new System.Windows.Forms.Panel();
             this.pnlFamilies = new System.Windows.Forms.Panel();
             this.pnlProductInformation = new System.Windows.Forms.Panel();
+            this.pboxCloseProductInformation = new System.Windows.Forms.PictureBox();
+            this.pboxProduct = new System.Windows.Forms.PictureBox();
             this.lblPointsProduct = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.lblInitialPrice = new System.Windows.Forms.Label();
@@ -52,34 +66,34 @@
             this.lblNameProduct = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.pnlProductsByFamily = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.pboxCloseProductInformation = new System.Windows.Forms.PictureBox();
-            this.pboxProduct = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pboxBid = new System.Windows.Forms.PictureBox();
-            this.pboxCloseForm = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.pboxCurrentProduct = new System.Windows.Forms.PictureBox();
+            this.lblPointsProductOfferded = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.lblCurrentPriceProduct = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.lblCurrentNameProduct = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txbLastOfferPlayer = new System.Windows.Forms.TextBox();
+            this.txbLastOffer = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxCloseForm)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxPlay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxDecrementValueOffer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxIncreaseValueOffer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboDecrementBid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxIncreaseBid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxBid)).BeginInit();
             this.pnlProductInformation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxCloseProductInformation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxProduct)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxBid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxCloseForm)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxCurrentProduct)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -93,107 +107,118 @@
             this.panel1.TabIndex = 0;
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             // 
-            // txbTime
+            // pboxCloseForm
             // 
-            this.txbTime.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pboxCloseForm.Image = global::AuctionGame_User.Properties.Resources.cerrar;
+            this.pboxCloseForm.Location = new System.Drawing.Point(1001, 8);
+            this.pboxCloseForm.Name = "pboxCloseForm";
+            this.pboxCloseForm.Size = new System.Drawing.Size(15, 15);
+            this.pboxCloseForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pboxCloseForm.TabIndex = 0;
+            this.pboxCloseForm.TabStop = false;
+            this.pboxCloseForm.Click += new System.EventHandler(this.pboxCloseForm_Click);
+            // 
+            // txbClock
+            // 
+            this.txbClock.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txbTime.AutoSize = true;
-            this.txbTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txbTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txbTime.Font = new System.Drawing.Font("DS-Digital", 42F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbTime.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.txbTime.Location = new System.Drawing.Point(431, 6);
-            this.txbTime.Name = "txbTime";
-            this.txbTime.Size = new System.Drawing.Size(154, 58);
-            this.txbTime.TabIndex = 0;
-            this.txbTime.Text = "00:00";
+            this.txbClock.AutoSize = true;
+            this.txbClock.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txbClock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.txbClock.Font = new System.Drawing.Font("DS-Digital", 42F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbClock.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.txbClock.Location = new System.Drawing.Point(431, 6);
+            this.txbClock.Name = "txbClock";
+            this.txbClock.Size = new System.Drawing.Size(154, 58);
+            this.txbClock.TabIndex = 0;
+            this.txbClock.Text = "00:00";
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(53)))), ((int)(((byte)(80)))));
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label9);
+            this.panel2.Controls.Add(this.lblPoints);
+            this.panel2.Controls.Add(this.lblMoney);
+            this.panel2.Controls.Add(this.lblRoundNumber);
+            this.panel2.Controls.Add(this.lblAuctionNumber);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.txbTime);
+            this.panel2.Controls.Add(this.txbClock);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 30);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1026, 70);
             this.panel2.TabIndex = 1;
             // 
-            // label6
+            // lblPoints
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblPoints.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label6.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label6.Location = new System.Drawing.Point(885, 31);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 28);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "000";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPoints.AutoSize = true;
+            this.lblPoints.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPoints.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblPoints.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPoints.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblPoints.Location = new System.Drawing.Point(885, 31);
+            this.lblPoints.Name = "lblPoints";
+            this.lblPoints.Size = new System.Drawing.Size(65, 28);
+            this.lblPoints.TabIndex = 8;
+            this.lblPoints.Text = "000";
+            this.lblPoints.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label7
+            // lblMoney
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblMoney.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label7.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label7.Location = new System.Drawing.Point(671, 34);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 28);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "000";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMoney.AutoSize = true;
+            this.lblMoney.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMoney.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblMoney.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMoney.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblMoney.Location = new System.Drawing.Point(671, 34);
+            this.lblMoney.Name = "lblMoney";
+            this.lblMoney.Size = new System.Drawing.Size(65, 28);
+            this.lblMoney.TabIndex = 7;
+            this.lblMoney.Text = "000";
+            this.lblMoney.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label8
+            // lblRoundNumber
             // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblRoundNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label8.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label8.Location = new System.Drawing.Point(234, 34);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 28);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "000";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblRoundNumber.AutoSize = true;
+            this.lblRoundNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblRoundNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblRoundNumber.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRoundNumber.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblRoundNumber.Location = new System.Drawing.Point(234, 34);
+            this.lblRoundNumber.Name = "lblRoundNumber";
+            this.lblRoundNumber.Size = new System.Drawing.Size(65, 28);
+            this.lblRoundNumber.TabIndex = 6;
+            this.lblRoundNumber.Text = "000";
+            this.lblRoundNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label9
+            // lblAuctionNumber
             // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblAuctionNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label9.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label9.Location = new System.Drawing.Point(37, 34);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 28);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "000";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAuctionNumber.AutoSize = true;
+            this.lblAuctionNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblAuctionNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblAuctionNumber.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAuctionNumber.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblAuctionNumber.Location = new System.Drawing.Point(37, 34);
+            this.lblAuctionNumber.Name = "lblAuctionNumber";
+            this.lblAuctionNumber.Size = new System.Drawing.Size(65, 28);
+            this.lblAuctionNumber.TabIndex = 5;
+            this.lblAuctionNumber.Text = "000";
+            this.lblAuctionNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
@@ -259,19 +284,19 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Subasta";
             // 
-            // timer1
+            // timerAuction
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timerAuction.Interval = 1000;
+            this.timerAuction.Tick += new System.EventHandler(this.timerAuction_Tick);
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(53)))), ((int)(((byte)(80)))));
-            this.panel3.Controls.Add(this.pictureBox3);
-            this.panel3.Controls.Add(this.pictureBox4);
-            this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Controls.Add(this.pboxPlay);
+            this.panel3.Controls.Add(this.pboxDecrementValueOffer);
+            this.panel3.Controls.Add(this.pboxIncreaseValueOffer);
+            this.panel3.Controls.Add(this.pboDecrementBid);
+            this.panel3.Controls.Add(this.pboxIncreaseBid);
             this.panel3.Controls.Add(this.textBox2);
             this.panel3.Controls.Add(this.textBox1);
             this.panel3.Controls.Add(this.label11);
@@ -282,6 +307,111 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1026, 90);
             this.panel3.TabIndex = 3;
+            // 
+            // pboxPlay
+            // 
+            this.pboxPlay.Image = global::AuctionGame_User.Properties.Resources.jugar;
+            this.pboxPlay.Location = new System.Drawing.Point(936, 18);
+            this.pboxPlay.Name = "pboxPlay";
+            this.pboxPlay.Size = new System.Drawing.Size(60, 60);
+            this.pboxPlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboxPlay.TabIndex = 16;
+            this.pboxPlay.TabStop = false;
+            this.pboxPlay.Click += new System.EventHandler(this.pboxPlay_Click);
+            // 
+            // pboxDecrementValueOffer
+            // 
+            this.pboxDecrementValueOffer.Image = global::AuctionGame_User.Properties.Resources.bajar_2_1;
+            this.pboxDecrementValueOffer.Location = new System.Drawing.Point(720, 51);
+            this.pboxDecrementValueOffer.Name = "pboxDecrementValueOffer";
+            this.pboxDecrementValueOffer.Size = new System.Drawing.Size(30, 30);
+            this.pboxDecrementValueOffer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboxDecrementValueOffer.TabIndex = 15;
+            this.pboxDecrementValueOffer.TabStop = false;
+            // 
+            // pboxIncreaseValueOffer
+            // 
+            this.pboxIncreaseValueOffer.Image = global::AuctionGame_User.Properties.Resources.subir_2_;
+            this.pboxIncreaseValueOffer.Location = new System.Drawing.Point(720, 15);
+            this.pboxIncreaseValueOffer.Name = "pboxIncreaseValueOffer";
+            this.pboxIncreaseValueOffer.Size = new System.Drawing.Size(30, 30);
+            this.pboxIncreaseValueOffer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboxIncreaseValueOffer.TabIndex = 14;
+            this.pboxIncreaseValueOffer.TabStop = false;
+            // 
+            // pboDecrementBid
+            // 
+            this.pboDecrementBid.Image = global::AuctionGame_User.Properties.Resources.bajar_2_;
+            this.pboDecrementBid.Location = new System.Drawing.Point(269, 51);
+            this.pboDecrementBid.Name = "pboDecrementBid";
+            this.pboDecrementBid.Size = new System.Drawing.Size(30, 30);
+            this.pboDecrementBid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboDecrementBid.TabIndex = 13;
+            this.pboDecrementBid.TabStop = false;
+            // 
+            // pboxIncreaseBid
+            // 
+            this.pboxIncreaseBid.Image = global::AuctionGame_User.Properties.Resources.subir_2_;
+            this.pboxIncreaseBid.Location = new System.Drawing.Point(269, 15);
+            this.pboxIncreaseBid.Name = "pboxIncreaseBid";
+            this.pboxIncreaseBid.Size = new System.Drawing.Size(30, 30);
+            this.pboxIncreaseBid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboxIncreaseBid.TabIndex = 12;
+            this.pboxIncreaseBid.TabStop = false;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Enabled = false;
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(554, 43);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(160, 38);
+            this.textBox2.TabIndex = 11;
+            this.textBox2.Text = "000";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(312, 43);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(160, 38);
+            this.textBox1.TabIndex = 10;
+            this.textBox1.Text = "000";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Yellow;
+            this.label11.Location = new System.Drawing.Point(582, 15);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(105, 24);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "Incremento";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Yellow;
+            this.label1.Location = new System.Drawing.Point(358, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 24);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Oferta";
+            // 
+            // pboxBid
+            // 
+            this.pboxBid.Image = global::AuctionGame_User.Properties.Resources.oferta;
+            this.pboxBid.Location = new System.Drawing.Point(478, 15);
+            this.pboxBid.Name = "pboxBid";
+            this.pboxBid.Size = new System.Drawing.Size(70, 70);
+            this.pboxBid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboxBid.TabIndex = 0;
+            this.pboxBid.TabStop = false;
             // 
             // pnlProducts
             // 
@@ -320,6 +450,27 @@
             this.pnlProductInformation.Size = new System.Drawing.Size(141, 375);
             this.pnlProductInformation.TabIndex = 6;
             this.pnlProductInformation.Visible = false;
+            // 
+            // pboxCloseProductInformation
+            // 
+            this.pboxCloseProductInformation.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pboxCloseProductInformation.Image = global::AuctionGame_User.Properties.Resources.espalda;
+            this.pboxCloseProductInformation.Location = new System.Drawing.Point(0, 345);
+            this.pboxCloseProductInformation.Name = "pboxCloseProductInformation";
+            this.pboxCloseProductInformation.Size = new System.Drawing.Size(141, 30);
+            this.pboxCloseProductInformation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboxCloseProductInformation.TabIndex = 7;
+            this.pboxCloseProductInformation.TabStop = false;
+            this.pboxCloseProductInformation.Click += new System.EventHandler(this.pboxClose_Click);
+            // 
+            // pboxProduct
+            // 
+            this.pboxProduct.Location = new System.Drawing.Point(6, 6);
+            this.pboxProduct.Name = "pboxProduct";
+            this.pboxProduct.Size = new System.Drawing.Size(130, 170);
+            this.pboxProduct.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboxProduct.TabIndex = 6;
+            this.pboxProduct.TabStop = false;
             // 
             // lblPointsProduct
             // 
@@ -398,134 +549,18 @@
             this.pnlProductsByFamily.TabIndex = 7;
             this.pnlProductsByFamily.Visible = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Yellow;
-            this.label1.Location = new System.Drawing.Point(358, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 24);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Oferta";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Yellow;
-            this.label11.Location = new System.Drawing.Point(582, 15);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(105, 24);
-            this.label11.TabIndex = 9;
-            this.label11.Text = "Incremento";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(312, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 38);
-            this.textBox1.TabIndex = 10;
-            this.textBox1.Text = "000";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(554, 43);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(160, 38);
-            this.textBox2.TabIndex = 11;
-            this.textBox2.Text = "000";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // pboxCloseProductInformation
-            // 
-            this.pboxCloseProductInformation.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pboxCloseProductInformation.Image = global::AuctionGame_User.Properties.Resources.espalda;
-            this.pboxCloseProductInformation.Location = new System.Drawing.Point(0, 345);
-            this.pboxCloseProductInformation.Name = "pboxCloseProductInformation";
-            this.pboxCloseProductInformation.Size = new System.Drawing.Size(141, 30);
-            this.pboxCloseProductInformation.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pboxCloseProductInformation.TabIndex = 7;
-            this.pboxCloseProductInformation.TabStop = false;
-            this.pboxCloseProductInformation.Click += new System.EventHandler(this.pboxClose_Click);
-            // 
-            // pboxProduct
-            // 
-            this.pboxProduct.Location = new System.Drawing.Point(6, 6);
-            this.pboxProduct.Name = "pboxProduct";
-            this.pboxProduct.Size = new System.Drawing.Size(130, 170);
-            this.pboxProduct.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pboxProduct.TabIndex = 6;
-            this.pboxProduct.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::AuctionGame_User.Properties.Resources.bajar_2_1;
-            this.pictureBox3.Location = new System.Drawing.Point(720, 51);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 15;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::AuctionGame_User.Properties.Resources.subir_2_;
-            this.pictureBox4.Location = new System.Drawing.Point(720, 15);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 14;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::AuctionGame_User.Properties.Resources.bajar_2_;
-            this.pictureBox2.Location = new System.Drawing.Point(269, 51);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 13;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::AuctionGame_User.Properties.Resources.subir_2_;
-            this.pictureBox1.Location = new System.Drawing.Point(269, 15);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 12;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pboxBid
-            // 
-            this.pboxBid.Image = global::AuctionGame_User.Properties.Resources.oferta;
-            this.pboxBid.Location = new System.Drawing.Point(478, 15);
-            this.pboxBid.Name = "pboxBid";
-            this.pboxBid.Size = new System.Drawing.Size(70, 70);
-            this.pboxBid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pboxBid.TabIndex = 0;
-            this.pboxBid.TabStop = false;
-            // 
-            // pboxCloseForm
-            // 
-            this.pboxCloseForm.Image = global::AuctionGame_User.Properties.Resources.cerrar;
-            this.pboxCloseForm.Location = new System.Drawing.Point(1001, 8);
-            this.pboxCloseForm.Name = "pboxCloseForm";
-            this.pboxCloseForm.Size = new System.Drawing.Size(15, 15);
-            this.pboxCloseForm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pboxCloseForm.TabIndex = 0;
-            this.pboxCloseForm.TabStop = false;
-            this.pboxCloseForm.Click += new System.EventHandler(this.pboxCloseForm_Click);
-            // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.label22);
+            this.panel4.Controls.Add(this.pboxCurrentProduct);
+            this.panel4.Controls.Add(this.lblPointsProductOfferded);
+            this.panel4.Controls.Add(this.label17);
+            this.panel4.Controls.Add(this.lblCurrentPriceProduct);
+            this.panel4.Controls.Add(this.label19);
+            this.panel4.Controls.Add(this.lblCurrentNameProduct);
+            this.panel4.Controls.Add(this.label21);
+            this.panel4.Controls.Add(this.txbLastOfferPlayer);
+            this.panel4.Controls.Add(this.txbLastOffer);
             this.panel4.Controls.Add(this.label15);
             this.panel4.Controls.Add(this.label13);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -534,29 +569,148 @@
             this.panel4.Size = new System.Drawing.Size(444, 375);
             this.panel4.TabIndex = 8;
             // 
-            // label13
+            // label22
             // 
-            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Yellow;
-            this.label13.Location = new System.Drawing.Point(6, 6);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(150, 25);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Última Oferta";
+            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.Yellow;
+            this.label22.Location = new System.Drawing.Point(163, 6);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(130, 45);
+            this.label22.TabIndex = 25;
+            this.label22.Text = "Producto en subasta";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pboxCurrentProduct
+            // 
+            this.pboxCurrentProduct.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pboxCurrentProduct.Image = ((System.Drawing.Image)(resources.GetObject("pboxCurrentProduct.Image")));
+            this.pboxCurrentProduct.Location = new System.Drawing.Point(163, 54);
+            this.pboxCurrentProduct.Name = "pboxCurrentProduct";
+            this.pboxCurrentProduct.Size = new System.Drawing.Size(130, 170);
+            this.pboxCurrentProduct.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboxCurrentProduct.TabIndex = 24;
+            this.pboxCurrentProduct.TabStop = false;
+            // 
+            // lblPointsProductOfferded
+            // 
+            this.lblPointsProductOfferded.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblPointsProductOfferded.AutoSize = true;
+            this.lblPointsProductOfferded.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPointsProductOfferded.ForeColor = System.Drawing.Color.Snow;
+            this.lblPointsProductOfferded.Location = new System.Drawing.Point(130, 327);
+            this.lblPointsProductOfferded.Name = "lblPointsProductOfferded";
+            this.lblPointsProductOfferded.Size = new System.Drawing.Size(17, 23);
+            this.lblPointsProductOfferded.TabIndex = 23;
+            this.lblPointsProductOfferded.Text = "-";
+            // 
+            // label17
+            // 
+            this.label17.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.Yellow;
+            this.label17.Location = new System.Drawing.Point(56, 326);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(68, 24);
+            this.label17.TabIndex = 22;
+            this.label17.Text = "Puntos";
+            // 
+            // lblCurrentPriceProduct
+            // 
+            this.lblCurrentPriceProduct.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblCurrentPriceProduct.AutoSize = true;
+            this.lblCurrentPriceProduct.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentPriceProduct.ForeColor = System.Drawing.Color.Snow;
+            this.lblCurrentPriceProduct.Location = new System.Drawing.Point(130, 291);
+            this.lblCurrentPriceProduct.Name = "lblCurrentPriceProduct";
+            this.lblCurrentPriceProduct.Size = new System.Drawing.Size(17, 23);
+            this.lblCurrentPriceProduct.TabIndex = 21;
+            this.lblCurrentPriceProduct.Text = "-";
+            // 
+            // label19
+            // 
+            this.label19.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.Yellow;
+            this.label19.Location = new System.Drawing.Point(8, 290);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(116, 24);
+            this.label19.TabIndex = 20;
+            this.label19.Text = "Precio Inicial";
+            // 
+            // lblCurrentNameProduct
+            // 
+            this.lblCurrentNameProduct.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblCurrentNameProduct.AutoSize = true;
+            this.lblCurrentNameProduct.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentNameProduct.ForeColor = System.Drawing.Color.Snow;
+            this.lblCurrentNameProduct.Location = new System.Drawing.Point(130, 250);
+            this.lblCurrentNameProduct.Name = "lblCurrentNameProduct";
+            this.lblCurrentNameProduct.Size = new System.Drawing.Size(17, 23);
+            this.lblCurrentNameProduct.TabIndex = 19;
+            this.lblCurrentNameProduct.Text = "-";
+            // 
+            // label21
+            // 
+            this.label21.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.Yellow;
+            this.label21.Location = new System.Drawing.Point(45, 249);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(79, 24);
+            this.label21.TabIndex = 18;
+            this.label21.Text = "Nombre";
+            // 
+            // txbLastOfferPlayer
+            // 
+            this.txbLastOfferPlayer.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.txbLastOfferPlayer.Enabled = false;
+            this.txbLastOfferPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbLastOfferPlayer.Location = new System.Drawing.Point(316, 31);
+            this.txbLastOfferPlayer.Name = "txbLastOfferPlayer";
+            this.txbLastOfferPlayer.Size = new System.Drawing.Size(120, 31);
+            this.txbLastOfferPlayer.TabIndex = 17;
+            this.txbLastOfferPlayer.Text = "000";
+            this.txbLastOfferPlayer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txbLastOffer
+            // 
+            this.txbLastOffer.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txbLastOffer.Enabled = false;
+            this.txbLastOffer.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbLastOffer.Location = new System.Drawing.Point(6, 31);
+            this.txbLastOffer.Name = "txbLastOffer";
+            this.txbLastOffer.Size = new System.Drawing.Size(120, 31);
+            this.txbLastOffer.TabIndex = 16;
+            this.txbLastOffer.Text = "000";
+            this.txbLastOffer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label15
             // 
             this.label15.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Yellow;
-            this.label15.Location = new System.Drawing.Point(329, 3);
+            this.label15.Location = new System.Drawing.Point(336, 8);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(109, 25);
+            this.label15.Size = new System.Drawing.Size(83, 20);
             this.label15.TabIndex = 1;
             this.label15.Text = "Mi Oferta";
+            // 
+            // label13
+            // 
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Yellow;
+            this.label13.Location = new System.Drawing.Point(8, 6);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(116, 20);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Última Oferta";
             // 
             // FrmGame
             // 
@@ -574,25 +728,28 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmGame";
-            this.Text = "Form1";
+            this.Text = "|";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmGame_FormClosing);
             this.Load += new System.EventHandler(this.FrmGame_Load);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pboxCloseForm)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxPlay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxDecrementValueOffer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxIncreaseValueOffer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboDecrementBid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxIncreaseBid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxBid)).EndInit();
             this.pnlProductInformation.ResumeLayout(false);
             this.pnlProductInformation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxCloseProductInformation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxProduct)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxBid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxCloseForm)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxCurrentProduct)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -601,17 +758,17 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pboxCloseForm;
-        private System.Windows.Forms.Label txbTime;
+        private System.Windows.Forms.Label txbClock;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblPoints;
+        private System.Windows.Forms.Label lblMoney;
+        private System.Windows.Forms.Label lblRoundNumber;
+        private System.Windows.Forms.Label lblAuctionNumber;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timerAuction;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel pnlProducts;
         private System.Windows.Forms.Panel pnlFamilies;
@@ -630,13 +787,24 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pboxBid;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pboxDecrementValueOffer;
+        private System.Windows.Forms.PictureBox pboxIncreaseValueOffer;
+        private System.Windows.Forms.PictureBox pboDecrementBid;
+        private System.Windows.Forms.PictureBox pboxIncreaseBid;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txbLastOfferPlayer;
+        private System.Windows.Forms.TextBox txbLastOffer;
+        private System.Windows.Forms.PictureBox pboxCurrentProduct;
+        private System.Windows.Forms.Label lblPointsProductOfferded;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lblCurrentPriceProduct;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label lblCurrentNameProduct;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.PictureBox pboxPlay;
     }
 }
 

@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BetweenValues.cs" />
+    <Compile Include="Bidder.cs" />
     <Compile Include="DataControl.cs" />
     <Compile Include="DbConection.cs" />
     <Compile Include="Family.cs" />
@@ -62,7 +64,11 @@
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="Statistical.cs" />
     <Compile Include="Time.cs" />
+    <Compile Include="TimesValues.cs" />
+    <Compile Include="VirtualBidder.cs" />
     <EmbeddedResource Include="FrmGame.resx">
       <DependentUpon>FrmGame.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,6 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bajar%282%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jugar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
