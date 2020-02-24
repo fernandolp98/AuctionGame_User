@@ -79,6 +79,8 @@
             this.txbLastOffer = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.txbCurrentWinner = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxCloseForm)).BeginInit();
             this.panel2.SuspendLayout();
@@ -329,6 +331,7 @@
             this.pboxDecrementValueOffer.TabIndex = 15;
             this.pboxDecrementValueOffer.TabStop = false;
             this.pboxDecrementValueOffer.Click += new System.EventHandler(this.pboxDecrementValueOffer_Click);
+            this.pboxDecrementValueOffer.DoubleClick += new System.EventHandler(this.pboxDecrementValueOffer_Click);
             // 
             // pboxIncreaseValueOffer
             // 
@@ -340,6 +343,7 @@
             this.pboxIncreaseValueOffer.TabIndex = 14;
             this.pboxIncreaseValueOffer.TabStop = false;
             this.pboxIncreaseValueOffer.Click += new System.EventHandler(this.pboxIncreaseValueOffer_Click);
+            this.pboxIncreaseValueOffer.DoubleClick += new System.EventHandler(this.pboxIncreaseValueOffer_Click);
             // 
             // pboDecrementBid
             // 
@@ -351,6 +355,7 @@
             this.pboDecrementBid.TabIndex = 13;
             this.pboDecrementBid.TabStop = false;
             this.pboDecrementBid.Click += new System.EventHandler(this.pboDecrementBid_Click);
+            this.pboDecrementBid.DoubleClick += new System.EventHandler(this.pboDecrementBid_Click);
             // 
             // pboxIncreaseBid
             // 
@@ -362,6 +367,7 @@
             this.pboxIncreaseBid.TabIndex = 12;
             this.pboxIncreaseBid.TabStop = false;
             this.pboxIncreaseBid.Click += new System.EventHandler(this.pboxIncreaseBid_Click);
+            this.pboxIncreaseBid.DoubleClick += new System.EventHandler(this.pboxIncreaseBid_Click);
             // 
             // txbIncreaseOffert
             // 
@@ -556,6 +562,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.txbCurrentWinner);
+            this.panel4.Controls.Add(this.label6);
             this.panel4.Controls.Add(this.label22);
             this.panel4.Controls.Add(this.pboxCurrentProduct);
             this.panel4.Controls.Add(this.lblPointsProductOfferded);
@@ -717,6 +725,30 @@
             this.label13.TabIndex = 0;
             this.label13.Text = "Última Oferta";
             // 
+            // txbCurrentWinner
+            // 
+            this.txbCurrentWinner.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txbCurrentWinner.Enabled = false;
+            this.txbCurrentWinner.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbCurrentWinner.Location = new System.Drawing.Point(6, 103);
+            this.txbCurrentWinner.Name = "txbCurrentWinner";
+            this.txbCurrentWinner.Size = new System.Drawing.Size(120, 31);
+            this.txbCurrentWinner.TabIndex = 27;
+            this.txbCurrentWinner.Text = "-";
+            this.txbCurrentWinner.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Yellow;
+            this.label6.Location = new System.Drawing.Point(-1, 78);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(135, 20);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Ganador Actual";
+            // 
             // FrmGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -810,6 +842,8 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.PictureBox pboxPlay;
+        private System.Windows.Forms.TextBox txbCurrentWinner;
+        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -423,7 +423,7 @@ namespace AuctionGame_User
             if (!_activeAuction) return;
             var newOffer = decimal.Parse(txbOffer.Text);
             var increase = newOffer - _lastOffert;
-            if (newOffer > _lastOffert && _player.OutBidder == false)
+            if (newOffer > _lastOffert && newOffer <= _player.Wallet && _player.OutBidder == false)
             {
                 TimeSpan timeBetweenBidd = DateTime.Now - _player.LastBiddTime;
                 _player.LastBiddTime = DateTime.Now;
@@ -432,18 +432,12 @@ namespace AuctionGame_User
                 //se le asigna el valor del campo TxtBoxValueOffert a la variable My ofert
                 _player.Offert = newOffer;//Int32.Parse(TxtBoxValueOffert.Text);
 
-                _currentWinner = _player.IdBidder;//el ganadaor por el momento es el jugador, se pone su ID
-
-                //lblPruebaPriceItem.Text = "" + player.Offert + " ID = "+ winnerBidder;//se manda la oferta echa, se escribe en la etiqueta de prueba
-
                 txbLastOfferPlayer.Text = _player.Offert.ToString();//se cambia el dato de mi ultima oferta en el campo de texto de la barra de estadisticas
 
                 //se cambian los valores del campo de ultima oferta
-                _lastOffert = _player.Offert;
 
-                txbLastOffer.Text = _lastOffert.ToString();//llenar  el campo de la ultima offerta
+                UpdateBid(_player);
 
-                _roundActivity++;//se aumenta la actividad en la ronda
 
                 _player.UpdateParticipation();// se actualiza la participacion del jugador
 
@@ -501,22 +495,8 @@ namespace AuctionGame_User
                                 //aumenta el tamaño de size para pasar al siguiente bidder
                                 if (vb.WantToBid(_lastOffert, _currentWinner, _round))// si cambia el ultimo apostador ganador se modifican las etiquetas
                                 {
-                                    _currentWinner = vb.IdBidder;//Cambia el bidder que por el momento es el ganador
-                                    _lastOffert = vb.Offert;//cambia la ultima offerta
+                                    UpdateBid(vb);
 
-                                    /*if (rtxbPujas.InvokeRequired)
-                                    {
-                                        rtxbPujas.Invoke(new MethodInvoker(delegate
-                                        {
-                                            string newPuja = vb.Bidder_id + " : " + ultimateOffert + "\n";
-                                            addText(newPuja, Color.Red, true);
-
-                                            // rtxbPujas.SelectionColor = (rtxbPujas.ForeColor == Color.Red) ? Color.Blue :Color.Red;
-                                        }));
-                                    }*/
-                                    string newPuja = vb.IdBidder + " : " + _lastOffert + "\n";
-                                    addText(newPuja, Color.Red, true);
-                                    _roundActivity++;//aumenta la actividad en la ronda
                                     Thread.Sleep(2000);//Le da un margen de 2 segundos entre jugadores para evitar el solapamiento
                                 }
                                 semaphore.Release();
@@ -530,6 +510,37 @@ namespace AuctionGame_User
             {
                 Console.WriteLine(e);
             }
+
+        }
+        private void UpdateBid(Bidder bidder)
+        {
+            _currentWinner = bidder.IdBidder;
+            _lastOffert = bidder.Offert;
+            if (txbLastOffer.InvokeRequired)
+            {
+                txbLastOffer.Invoke(new MethodInvoker(delegate
+                {
+                    txbLastOffer.Text = _lastOffert.ToString();
+                }));
+            }
+            else
+            {
+                txbLastOffer.Text = _lastOffert.ToString();
+            }
+            if (txbCurrentWinner.InvokeRequired)
+            {
+                txbCurrentWinner.Invoke(new MethodInvoker(delegate
+                {
+                    txbCurrentWinner.Text = _currentWinner.ToString();
+                }));
+            }
+            else
+            {
+                txbCurrentWinner.Text = _currentWinner.ToString();
+            }
+            _roundActivity++;
+            string newPuja = bidder.IdBidder + " : " + _lastOffert + "\n";
+            addText(newPuja, Color.Red, true);
 
         }
 
