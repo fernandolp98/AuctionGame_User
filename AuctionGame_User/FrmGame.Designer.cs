@@ -49,8 +49,8 @@
             this.pboxIncreaseValueOffer = new System.Windows.Forms.PictureBox();
             this.pboDecrementBid = new System.Windows.Forms.PictureBox();
             this.pboxIncreaseBid = new System.Windows.Forms.PictureBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txbIncreaseOffert = new System.Windows.Forms.TextBox();
+            this.txbOffer = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pboxBid = new System.Windows.Forms.PictureBox();
@@ -297,8 +297,8 @@
             this.panel3.Controls.Add(this.pboxIncreaseValueOffer);
             this.panel3.Controls.Add(this.pboDecrementBid);
             this.panel3.Controls.Add(this.pboxIncreaseBid);
-            this.panel3.Controls.Add(this.textBox2);
-            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.txbIncreaseOffert);
+            this.panel3.Controls.Add(this.txbOffer);
             this.panel3.Controls.Add(this.label11);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.pboxBid);
@@ -328,6 +328,7 @@
             this.pboxDecrementValueOffer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pboxDecrementValueOffer.TabIndex = 15;
             this.pboxDecrementValueOffer.TabStop = false;
+            this.pboxDecrementValueOffer.Click += new System.EventHandler(this.pboxDecrementValueOffer_Click);
             // 
             // pboxIncreaseValueOffer
             // 
@@ -338,6 +339,7 @@
             this.pboxIncreaseValueOffer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pboxIncreaseValueOffer.TabIndex = 14;
             this.pboxIncreaseValueOffer.TabStop = false;
+            this.pboxIncreaseValueOffer.Click += new System.EventHandler(this.pboxIncreaseValueOffer_Click);
             // 
             // pboDecrementBid
             // 
@@ -348,6 +350,7 @@
             this.pboDecrementBid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pboDecrementBid.TabIndex = 13;
             this.pboDecrementBid.TabStop = false;
+            this.pboDecrementBid.Click += new System.EventHandler(this.pboDecrementBid_Click);
             // 
             // pboxIncreaseBid
             // 
@@ -358,28 +361,29 @@
             this.pboxIncreaseBid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pboxIncreaseBid.TabIndex = 12;
             this.pboxIncreaseBid.TabStop = false;
+            this.pboxIncreaseBid.Click += new System.EventHandler(this.pboxIncreaseBid_Click);
             // 
-            // textBox2
+            // txbIncreaseOffert
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(554, 43);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(160, 38);
-            this.textBox2.TabIndex = 11;
-            this.textBox2.Text = "000";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txbIncreaseOffert.Enabled = false;
+            this.txbIncreaseOffert.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbIncreaseOffert.Location = new System.Drawing.Point(554, 43);
+            this.txbIncreaseOffert.Name = "txbIncreaseOffert";
+            this.txbIncreaseOffert.Size = new System.Drawing.Size(160, 38);
+            this.txbIncreaseOffert.TabIndex = 11;
+            this.txbIncreaseOffert.Text = "000";
+            this.txbIncreaseOffert.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox1
+            // txbOffer
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(312, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 38);
-            this.textBox1.TabIndex = 10;
-            this.textBox1.Text = "000";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txbOffer.Enabled = false;
+            this.txbOffer.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbOffer.Location = new System.Drawing.Point(312, 43);
+            this.txbOffer.Name = "txbOffer";
+            this.txbOffer.Size = new System.Drawing.Size(160, 38);
+            this.txbOffer.TabIndex = 10;
+            this.txbOffer.Text = "000";
+            this.txbOffer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label11
             // 
@@ -412,6 +416,7 @@
             this.pboxBid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pboxBid.TabIndex = 0;
             this.pboxBid.TabStop = false;
+            this.pboxBid.Click += new System.EventHandler(this.pboxBid_Click);
             // 
             // pnlProducts
             // 
@@ -571,7 +576,7 @@
             // 
             // label22
             // 
-            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.Yellow;
             this.label22.Location = new System.Drawing.Point(163, 6);
@@ -782,8 +787,8 @@
         private System.Windows.Forms.PictureBox pboxProduct;
         private System.Windows.Forms.PictureBox pboxCloseProductInformation;
         private System.Windows.Forms.Panel pnlProductsByFamily;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbIncreaseOffert;
+        private System.Windows.Forms.TextBox txbOffer;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pboxBid;

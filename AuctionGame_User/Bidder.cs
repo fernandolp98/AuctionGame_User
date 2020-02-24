@@ -7,7 +7,7 @@ namespace AuctionGame_User
         public int IdBidder { get; set; }
         public string NameBidder { get; set; }
         public decimal Wallet { get; set; }
-        public int Offert { get; set; }
+        public decimal Offert { get; set; }
         public int ParticipationsRound { get; set; }
         public int Rounds { get; set; }
         public  bool RoundActual { get; set; }

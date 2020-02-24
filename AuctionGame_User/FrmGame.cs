@@ -369,8 +369,98 @@ namespace AuctionGame_User
             finishGame();
         }
 
+        private void pboxIncreaseValueOffer_Click(object sender, EventArgs e)
+        {
+            var currentValue = int.Parse(txbIncreaseOffert.Text);
+            currentValue++;
+            if (currentValue < 10)
+                txbIncreaseOffert.Text = "00" + currentValue;
+            else if(currentValue < 100)
+                txbIncreaseOffert.Text = "0" + currentValue;
+            else
+                txbIncreaseOffert.Text = currentValue.ToString();
+        }
+        private void pboxDecrementValueOffer_Click(object sender, EventArgs e)
+        {
+            var currentValue = int.Parse(txbIncreaseOffert.Text);
+            currentValue--;
+            if (currentValue < 10)
+                txbIncreaseOffert.Text = "00" + currentValue;
+            else if (currentValue < 100)
+                txbIncreaseOffert.Text = "0" + currentValue;
+            else
+                txbIncreaseOffert.Text = currentValue.ToString();
+        }
+
+        private void pboxIncreaseBid_Click(object sender, EventArgs e)
+        {
+            var currentValue = int.Parse(txbOffer.Text);
+            var increase = int.Parse(txbIncreaseOffert.Text);
+            currentValue+=increase;
+            if (currentValue < 10)
+                txbOffer.Text = "00" + currentValue;
+            else if (currentValue < 100)
+                txbOffer.Text = "0" + currentValue;
+            else
+                txbOffer.Text = currentValue.ToString();
+        }
+
+        private void pboDecrementBid_Click(object sender, EventArgs e)
+        {
+            var currentValue = int.Parse(txbOffer.Text);
+            if (currentValue == 0) return;
+            currentValue--;
+            if (currentValue < 10)
+                txbOffer.Text = "00" + currentValue;
+            else if (currentValue < 100)
+                txbOffer.Text = "0" + currentValue;
+            else
+                txbOffer.Text = currentValue.ToString();
+        }
+
+        private void pboxBid_Click(object sender, EventArgs e)
+        {
+            if (!_activeAuction) return;
+            var newOffer = decimal.Parse(txbOffer.Text);
+            var increase = newOffer - _lastOffert;
+            if (newOffer > _lastOffert && _player.OutBidder == false)
+            {
+                TimeSpan timeBetweenBidd = DateTime.Now - _player.LastBiddTime;
+                _player.LastBiddTime = DateTime.Now;
+                int secondsBetweenBidd = timeBetweenBidd.Seconds;
+
+                //se le asigna el valor del campo TxtBoxValueOffert a la variable My ofert
+                _player.Offert = newOffer;//Int32.Parse(TxtBoxValueOffert.Text);
+
+                _currentWinner = _player.IdBidder;//el ganadaor por el momento es el jugador, se pone su ID
+
+                //lblPruebaPriceItem.Text = "" + player.Offert + " ID = "+ winnerBidder;//se manda la oferta echa, se escribe en la etiqueta de prueba
+
+                txbLastOfferPlayer.Text = _player.Offert.ToString();//se cambia el dato de mi ultima oferta en el campo de texto de la barra de estadisticas
+
+                //se cambian los valores del campo de ultima oferta
+                _lastOffert = _player.Offert;
+
+                txbLastOffer.Text = _lastOffert.ToString();//llenar  el campo de la ultima offerta
+
+                _roundActivity++;//se aumenta la actividad en la ronda
+
+                _player.UpdateParticipation();// se actualiza la participacion del jugador
+
+                _player.Statistics.AddIncreaseForBidd(increase);
+                _player.Statistics.AddSecondsBetweenBidd(secondsBetweenBidd);
+
+                string newPuja = _player.IdBidder + " : " + _lastOffert + "\n";
+                addText(newPuja, Color.Green, true);
+            }
+        }
+
         private void finishGame()
         {
+            foreach(var vb in _virtualBidders)
+            {
+                vb.Hilo.Abort();
+            }
             _player.Statistics.Points = _player.Points;
             _player.Statistics.Wallet = _player.Wallet;
             _player.Statistics.Log = log;
@@ -436,7 +526,7 @@ namespace AuctionGame_User
                     }
                 }
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 Console.WriteLine(e);
             }
