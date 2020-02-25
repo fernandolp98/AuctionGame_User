@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AuctionGame_User
 {
@@ -15,9 +16,10 @@ namespace AuctionGame_User
         public double Points { get; set; }
         public Statistical Statistics { get; set; }
         public DateTime LastBiddTime { get; set; }
-
+        public List<Product> ProductsEarned { get; set; }
         public Bidder()
         {
+            ProductsEarned = new List<Product>();
             Statistics = new Statistical();
             LastBiddTime = DateTime.Now;
         }

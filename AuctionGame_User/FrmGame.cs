@@ -19,12 +19,12 @@ namespace AuctionGame_User
 
         private Bidder _player;
 
-        private int initialMinutes = 1, initialSeconds = 0;
+        private int initialMinutes =0, initialSeconds = 15;
         private int predeterminatedMinutes, predeterminatedSeconds;
         private int seconds, minutes;
 
         private int _currentProductIndex;
-        private Product _curretnProduct;
+        private Product _currentProduct;
 
         private decimal _lastOffert;
         private int _roundActivity;
@@ -36,6 +36,8 @@ namespace AuctionGame_User
 
         private string log;
 
+        private bool firstBidd = true;
+
 
         public FrmGame()
         {
@@ -43,7 +45,22 @@ namespace AuctionGame_User
             _products = Product.GetAllProducts();
             _families = Family.GetAllFamilies();
             _virtualBidders = VirtualBidder.GetAllVirtualBidders(null);
-            _player = new Bidder();
+            _player = new Bidder()
+            {
+                NameBidder = "Sin Nombre",
+                Wallet = 500,
+                IdBidder = 0
+            };
+        }
+        public FrmGame(Bidder player, Routine routine)
+        {
+            InitializeComponent();
+            _products = routine.AllProducts;
+            _families = routine.Families;
+            _virtualBidders = routine.VirtualBidders;
+            _player = player;
+            lblPlayerName.Text = _player.NameBidder;
+            lblMoney.Text = _player.Wallet.ToString();
         }
 
         private void pboxCloseForm_Click(object sender, EventArgs e)
@@ -182,17 +199,25 @@ namespace AuctionGame_User
             pnlProductInformation.Visible = true;
         }
 
+        [Obsolete]
         private void pboxPlay_Click(object sender, EventArgs e)
         {
             using (Semaphore semaphore = new Semaphore(1, 1, "Semaphore"))
             {
-                if (_virtualBidders != null)
+
+                if (_virtualBidders != null && firstBidd)
                     foreach (var vb in _virtualBidders)
                     {
                         Thread thread = new Thread(() => ManagerBidder(vb));
                         vb.Hilo = thread;
                         vb.Hilo.Start();
                     }
+                else
+                    foreach (var vb in _virtualBidders)
+                    {
+                        vb.Hilo.Resume();
+                    }
+                firstBidd = false;
                 nextBid();
             }
             //pb.Visible = false;
@@ -205,19 +230,22 @@ namespace AuctionGame_User
                 seconds = predeterminatedSeconds = initialSeconds;
                 minutes = predeterminatedMinutes = initialMinutes;
                 //Selecciona el siguiente producto
-                _curretnProduct = _products.ElementAt(_currentProductIndex);
+                _currentProduct = _products.ElementAt(_currentProductIndex);
                 _currentProductIndex++;
-                pboxCurrentProduct.Image = _curretnProduct.ImageProduct;
-                _lastOffert = _curretnProduct.Price; //variables para modificar los datos de la barra de estadisticas
+                pboxCurrentProduct.Image = _currentProduct.ImageProduct;
+                _lastOffert = _currentProduct.Price; //variables para modificar los datos de la barra de estadisticas
                 _roundActivity = 0; //numero de ofertas en una ronda
                 _round = 1; //numero de ronda actual
-                txbLastOffer.Text = _curretnProduct.Price.ToString();
-                lblCurrentNameProduct.Text = _curretnProduct.Name;
+                txbLastOffer.Text = _currentProduct.Price.ToString();
+                lblCurrentNameProduct.Text = _currentProduct.Name;
                 addText($"Inicia subasta por ", Color.Black, true);
-                addText(_curretnProduct.Name, Color.Red, false);
+                addText(_currentProduct.Name, Color.Red, false);
                 addText($"\nPrecio Inicial ", Color.Black, false);
-                addText(_curretnProduct.Price.ToString(), Color.Red, false);
+                addText(_currentProduct.Price.ToString(), Color.Red, false);
                 addText($"\nInicia Round 1\n", Color.Black, false);
+
+                lblAuctionNumber.Text = _currentProductIndex.ToString();
+                lblRoundNumber.Text = _round.ToString();
 
                 _currentWinner = 0;
                 if (_virtualBidders != null)
@@ -263,15 +291,13 @@ namespace AuctionGame_User
                     txbClock.BackColor = Color.Red;//cambia el color del reloj
                     if (_currentWinner == _player.IdBidder)//si el ganador es el jugador
                     {
-                        //productsEarned.Add(_curretnProduct);
-                        //familyUpdate();
-                        //player.Wallet = player.Wallet - player.Offert;// se le descuenta de su cartera el monto ofertado
-                        //player.Points += productoActual.points;
-                        //txbPoints.Text = player.Points.ToString();
-                        //txbMoney.Text = player.Wallet.ToString();
-                        //player.statistics.bidWin++;
-                        //ListViewItem item = lvwProductsForEarn.Items.Find(productoActual.id_product.ToString(), false)[0];
-                       // item.BackColor = Color.Green;
+                        _player.ProductsEarned.Add(_currentProduct);
+                        VerifyFamiliesEarned();
+                        _player.Wallet = _player.Wallet - _player.Offert;// se le descuenta de su cartera el monto ofertado
+                        _player.Points += _currentProduct.Points;
+                        lblPoints.Text = _player.Points.ToString();
+                        lblMoney.Text = _player.Wallet.ToString();
+                        _player.Statistics.BidWin++;
                     }
                     else
                     {
@@ -303,6 +329,7 @@ namespace AuctionGame_User
                     }
                     _roundActivity = 0;// se inicializa la actividad en la ronda
                     _round++;//se aumenta el round
+                    lblRoundNumber.Text = _round.ToString();
                     if (predeterminatedMinutes == 0)//si los minutos que se dan de manera predeterminada llegan a 0
                     {
                         if (predeterminatedSeconds > 20)//si los segundos que se dan de manera predeterminada son mas de 20
@@ -362,6 +389,27 @@ namespace AuctionGame_User
             }
 
             //cambiar etiqueta de tiempo lblClock
+        }
+        private void VerifyFamiliesEarned()
+        {
+            foreach (var family in _families)
+            {
+                int productsEarnedCount = 0;
+                foreach (var productEarned in  _player.ProductsEarned)
+                {
+                    foreach (var productNeccesary in family.Products)
+                    {
+                        if (productNeccesary.Equals(productEarned))
+                            productsEarnedCount++;
+                    }
+                }
+                if (productsEarnedCount == family.Products.Count)
+                {
+                    MessageBox.Show($"Ganaste {family.Points} puntos por haber completado los productos de la familia {family.NameFamily}");
+                    _player.Points += family.Points;
+                    lblPoints.Text = _player.Points.ToString();
+                }
+            }
         }
 
         private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
@@ -443,9 +491,6 @@ namespace AuctionGame_User
 
                 _player.Statistics.AddIncreaseForBidd(increase);
                 _player.Statistics.AddSecondsBetweenBidd(secondsBetweenBidd);
-
-                string newPuja = _player.IdBidder + " : " + _lastOffert + "\n";
-                addText(newPuja, Color.Green, true);
             }
         }
 
@@ -493,11 +538,17 @@ namespace AuctionGame_User
                             {
                                 semaphore.WaitOne();
                                 //aumenta el tamaño de size para pasar al siguiente bidder
+                                Console.WriteLine($"{vb.IdBidder} va a apostar...");
                                 if (vb.WantToBid(_lastOffert, _currentWinner, _round))// si cambia el ultimo apostador ganador se modifican las etiquetas
                                 {
                                     UpdateBid(vb);
 
                                     Thread.Sleep(2000);//Le da un margen de 2 segundos entre jugadores para evitar el solapamiento
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"{vb.IdBidder} no pudo apostar...");
+
                                 }
                                 semaphore.Release();
                                 Thread.Sleep(vb.Role.TimeToBid.NewFinallyValue() * 1000);
@@ -506,9 +557,10 @@ namespace AuctionGame_User
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
+                throw;
             }
 
         }

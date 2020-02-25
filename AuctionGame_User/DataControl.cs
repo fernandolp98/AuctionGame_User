@@ -6,88 +6,95 @@ using System.Windows.Forms;
 
 namespace AuctionGame_User
 {
-    static class DataControl
+    public class DataControl
     {
-        static readonly Font FontPlaceHolder = new Font("Segoe UI", 12F, FontStyle.Italic, GraphicsUnit.Point, 1);
-        static readonly Font FontDefault = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 1);
-        //static readonly Font FontRight = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 1);
+        public Font FontPlaceHolder { get; set; }
+        public Font FontRegular { get; set; }
+        public Color ColorPlaceHolder { get; set; }
+        public Color ColorRegular { get; set; }
+        public Color ColorError { get; set; }
 
-        public static void placeHolder_Leave(TextBox txb)
+        public DataControl (Font placeholder, Font regular, Color colorPlaceHolder, Color colorRegular, Color colorError)
+        {
+            FontPlaceHolder = placeholder;
+            FontRegular = regular;
+            ColorPlaceHolder = colorPlaceHolder;
+            ColorRegular = colorRegular;
+            ColorError = colorError;
+        }
+
+        public void placeHolder_Leave(TextBox txb)
         {
             if (txb.Text == "")
             {
                 Text(txb, txb.Tag.ToString().Split(',')[0]);
-                ForeColor(txb, Color.Silver);
+                ForeColor(txb, ColorPlaceHolder);
                 txb.Font = FontPlaceHolder;
             }
         }
-        public static void PlaceHolder_Enter(TextBox txb)
+        public void PlaceHolder_Enter(TextBox txb)
         {
-            if (txb.Text == txb.Tag.ToString().Split(',')[0] && (txb.ForeColor == Color.Silver || txb.ForeColor == Color.Red) && txb.Font.Italic)
+            var text = txb.Tag.ToString().Split(',')[0];
+            if (txb.Text ==  text && (txb.ForeColor == ColorPlaceHolder || txb.ForeColor == ColorError) && txb.Font.Equals(FontPlaceHolder))
             {
                 Text(txb, "");
-                ForeColor(txb, Color.Black);
-                txb.Font = FontDefault;
+                ForeColor(txb, ColorRegular);
+                txb.Font = FontRegular;
             }
         }
-        public static void TxbActivar(TextBox txb)
+        public void TxbActivar(TextBox txb)
         {
             ForeColor(txb, Color.Black);
-            txb.Font = FontDefault;
+            txb.Font = FontRegular;
             txb.Enabled = true;
         }
-        public static void TxbBorrar(TextBox txb)
+        public void TxbBorrar(TextBox txb)
         {
             txb.Text = "";
             placeHolder_Leave(txb);
         }
-        public static void ForeColor(TextBox txb, Color color)
+        public void ForeColor(TextBox txb, Color color)
         {
             txb.ForeColor = color;
         }
-        public static void ForeColor(Button btn, Color color)
+        public void ForeColor(Button btn, Color color)
         {
             btn.ForeColor = color;
         }
-        public static void BackColor(TextBox txb, Color color)
+        public void BackColor(TextBox txb, Color color)
         {
             txb.BackColor = color;
-        } 
-        public static void BackColor(Button btn, string color)
+        }
+        public void BackColor(Button btn, string color)
         {
-            switch(color)
-            {
-                case "azul": btn.BackColor = Color.FromArgb(255, 9, 101, 176); break;
-                case "rojo": btn.BackColor = Color.FromArgb(255, 223, 47, 59); break;
-                case "gris": btn.BackColor = Color.FromArgb(255, 126, 136, 143); break;
-            }
+            
         }
 
-        internal static void Clear(TextBox txb)
+        internal void Clear(TextBox txb)
         {
             var text = txb.Tag.ToString().Split(',')[0];
             txb.Font = FontPlaceHolder;
-            txb.ForeColor = Color.Silver;
+            txb.ForeColor = ColorPlaceHolder;
             txb.Text = text;
         }
 
-        public static void Text(TextBox txb, string str)
+        public void Text(TextBox txb, string str)
         {
             txb.Text = str;
-            txb.Font = FontDefault;
+            txb.Font = FontRegular;
             txb.ForeColor = Color.Black;
         }
-        public static void Text(MaskedTextBox txb, string str)
+        public void Text(MaskedTextBox txb, string str)
         {
             txb.Text = str;
-            txb.Font = FontDefault;
-            txb.ForeColor = Color.Black;
+            txb.Font = FontRegular;
+            txb.ForeColor = ColorRegular;
         }
-        public static void Text(Button btn, string str)
+        public  void Text(Button btn, string str)
         {
             btn.Text = str;
         }
-        public static void BtnEnabled(Button btn, string color)
+        public void BtnEnabled(Button btn, string color)
         {
             if(!btn.Enabled)
             {
@@ -96,7 +103,7 @@ namespace AuctionGame_User
                 btn.Visible = true;
             }
         }
-        public static void BtnUnabled(Button btn, string color, bool visible)
+        public void BtnUnabled(Button btn, string color, bool visible)
         {
             if (btn.Enabled)
             {
@@ -105,24 +112,24 @@ namespace AuctionGame_User
                 btn.Visible = visible;
             }
         }
-        public static void Invalido(object o)
+        public void Invalido(object o)
         {
             if (o.GetType() == typeof(TextBox))
             {
-                ((TextBox)o).ForeColor = Color.Red;
+                ((TextBox)o).ForeColor = ColorError;
             }
             if (o.GetType() == typeof(MaskedTextBox))
             {
-                ((MaskedTextBox)o).ForeColor = Color.Red;
+                ((MaskedTextBox)o).ForeColor = ColorError;
             }
         }
 
-        public static bool Validar(TextBox txb)
+        public bool Validar(TextBox txb)
         {
             var type = ((string)txb.Tag).Split(',')[1]; 
             return Validar(txb, type);
         }
-        public static bool Validar(TextBox txb, string type)
+        public bool Validar(TextBox txb, string type)
         {
             try
             {
@@ -182,7 +189,7 @@ namespace AuctionGame_User
                     }
 
                 }
-                txb.ForeColor = (error) ? Color.Red : Color.Black;
+                txb.ForeColor = (error) ? ColorError : ColorRegular;
                 return error;
             }
             catch (Exception e)
@@ -191,7 +198,7 @@ namespace AuctionGame_User
                 return true;
             }
         }
-        public static bool Validar(MaskedTextBox mtxb)
+        public bool Validar(MaskedTextBox mtxb)
         {
             try
             {
@@ -203,7 +210,7 @@ namespace AuctionGame_User
                         error = !Time.TryParse(mtxb.Text);
                     }
                 }
-                mtxb.ForeColor = (error) ? Color.Red : Color.Black;
+                mtxb.ForeColor = (error) ? ColorError : ColorRegular;
                 return error;
 
             }
@@ -213,14 +220,14 @@ namespace AuctionGame_User
                 return true;
             }
         }
-        public static bool Validar(object[] array)
+        public bool Validar(object[] array)
         {
             for (var index = 0; index < array.Length; index++)
             {
                 if (array[index] is TextBox)
                 {
                     var o = (TextBox)array[index];
-                    if (o.ForeColor == Color.Silver || o.ForeColor == Color.Red)
+                    if (o.ForeColor == ColorPlaceHolder || o.ForeColor == ColorError)
                     {
                         return false;
                     }
@@ -228,19 +235,17 @@ namespace AuctionGame_User
                 else if(array[index] is MaskedTextBox)
                 {
                     var o = (MaskedTextBox)array[index];
-                    if (o.ForeColor == Color.Silver || o.ForeColor == Color.Red)
+                    if (o.ForeColor == ColorPlaceHolder || o.ForeColor == ColorError)
                     {
                         return false;
                     }
                 }
-
-
             }
 
             return true;
         }
 
-        public static string ImageToBase64String(Image imagen)
+        public  string ImageToBase64String(Image imagen)
         {
             using (var ms = new System.IO.MemoryStream())
             {
@@ -248,7 +253,6 @@ namespace AuctionGame_User
                 return Convert.ToBase64String(ms.ToArray());
             }
         }
-
         public static Image Base64StringToImage(string stringBase64)
         {
             var imageBytes = Convert.FromBase64String(stringBase64);

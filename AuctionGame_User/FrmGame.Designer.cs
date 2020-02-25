@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmGame));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblPlayerName = new System.Windows.Forms.Label();
             this.pboxCloseForm = new System.Windows.Forms.PictureBox();
             this.txbClock = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -67,6 +68,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.pnlProductsByFamily = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.txbCurrentWinner = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.pboxCurrentProduct = new System.Windows.Forms.PictureBox();
             this.lblPointsProductOfferded = new System.Windows.Forms.Label();
@@ -79,8 +82,6 @@
             this.txbLastOffer = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.txbCurrentWinner = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxCloseForm)).BeginInit();
             this.panel2.SuspendLayout();
@@ -101,6 +102,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(44)))), ((int)(((byte)(66)))));
+            this.panel1.Controls.Add(this.lblPlayerName);
             this.panel1.Controls.Add(this.pboxCloseForm);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -108,6 +110,17 @@
             this.panel1.Size = new System.Drawing.Size(1026, 30);
             this.panel1.TabIndex = 0;
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            // 
+            // lblPlayerName
+            // 
+            this.lblPlayerName.AutoSize = true;
+            this.lblPlayerName.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerName.ForeColor = System.Drawing.Color.Snow;
+            this.lblPlayerName.Location = new System.Drawing.Point(12, 4);
+            this.lblPlayerName.Name = "lblPlayerName";
+            this.lblPlayerName.Size = new System.Drawing.Size(70, 23);
+            this.lblPlayerName.TabIndex = 2;
+            this.lblPlayerName.Text = "Jugador";
             // 
             // pboxCloseForm
             // 
@@ -181,11 +194,11 @@
             this.lblMoney.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lblMoney.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMoney.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblMoney.Location = new System.Drawing.Point(671, 34);
+            this.lblMoney.Location = new System.Drawing.Point(648, 34);
             this.lblMoney.Name = "lblMoney";
-            this.lblMoney.Size = new System.Drawing.Size(65, 28);
+            this.lblMoney.Size = new System.Drawing.Size(116, 28);
             this.lblMoney.TabIndex = 7;
-            this.lblMoney.Text = "000";
+            this.lblMoney.Text = "000.00";
             this.lblMoney.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblRoundNumber
@@ -582,6 +595,30 @@
             this.panel4.Size = new System.Drawing.Size(444, 375);
             this.panel4.TabIndex = 8;
             // 
+            // txbCurrentWinner
+            // 
+            this.txbCurrentWinner.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txbCurrentWinner.Enabled = false;
+            this.txbCurrentWinner.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbCurrentWinner.Location = new System.Drawing.Point(6, 103);
+            this.txbCurrentWinner.Name = "txbCurrentWinner";
+            this.txbCurrentWinner.Size = new System.Drawing.Size(120, 31);
+            this.txbCurrentWinner.TabIndex = 27;
+            this.txbCurrentWinner.Text = "-";
+            this.txbCurrentWinner.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Yellow;
+            this.label6.Location = new System.Drawing.Point(-1, 78);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(135, 20);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Ganador Actual";
+            // 
             // label22
             // 
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -725,30 +762,6 @@
             this.label13.TabIndex = 0;
             this.label13.Text = "Última Oferta";
             // 
-            // txbCurrentWinner
-            // 
-            this.txbCurrentWinner.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txbCurrentWinner.Enabled = false;
-            this.txbCurrentWinner.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbCurrentWinner.Location = new System.Drawing.Point(6, 103);
-            this.txbCurrentWinner.Name = "txbCurrentWinner";
-            this.txbCurrentWinner.Size = new System.Drawing.Size(120, 31);
-            this.txbCurrentWinner.TabIndex = 27;
-            this.txbCurrentWinner.Text = "-";
-            this.txbCurrentWinner.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Yellow;
-            this.label6.Location = new System.Drawing.Point(-1, 78);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(135, 20);
-            this.label6.TabIndex = 26;
-            this.label6.Text = "Ganador Actual";
-            // 
             // FrmGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -769,6 +782,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmGame_FormClosing);
             this.Load += new System.EventHandler(this.FrmGame_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxCloseForm)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -844,6 +858,7 @@
         private System.Windows.Forms.PictureBox pboxPlay;
         private System.Windows.Forms.TextBox txbCurrentWinner;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblPlayerName;
     }
 }
 
