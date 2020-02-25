@@ -16,7 +16,7 @@ namespace AuctionGame_User
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmGame());
+            Application.Run(new frmMainMenu());
         }
     }
 }
