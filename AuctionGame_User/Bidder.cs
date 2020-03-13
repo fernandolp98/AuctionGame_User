@@ -11,20 +11,13 @@ namespace AuctionGame_User
         public decimal Offert { get; set; }
         public int ParticipationsRound { get; set; }
         public int Rounds { get; set; }
-        public  bool RoundActual { get; set; }
         public bool OutBidder { get; set; }
         public double Points { get; set; }
-        public Statistical Statistics { get; set; }
         public DateTime LastBiddTime { get; set; }
-        public List<Product> ProductsEarned { get; set; }
         public Bidder()
         {
-            ProductsEarned = new List<Product>();
-            Statistics = new Statistical();
             LastBiddTime = DateTime.Now;
         }
-
-
         public void UpdateParticipation()
         {
             ParticipationsRound++;

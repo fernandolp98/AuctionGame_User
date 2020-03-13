@@ -1,6 +1,6 @@
 ﻿namespace AuctionGame_User
 {
-    partial class frmMainMenu
+    partial class FrmMainMenu
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMainMenu));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainMenu));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txbName = new System.Windows.Forms.TextBox();
@@ -187,7 +187,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmMainMenu";
+            this.Name = "FrmMainMenu";
             this.Opacity = 0.9D;
             this.Text = "frmMainMenu";
             this.Load += new System.EventHandler(this.frmMainMenu_Load);
