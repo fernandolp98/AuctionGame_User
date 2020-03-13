@@ -74,7 +74,7 @@ namespace AuctionGame_User
             var routine = (Routine)cboRoutines.SelectedItem;
                         
 
-            var game = new FrmGame(player, routine);
+            var game = new FrmGame(player);
             game.Show();
         }
 

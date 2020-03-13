@@ -70,12 +70,15 @@
     <Compile Include="FrmMainMenu.Designer.cs">
       <DependentUpon>FrmMainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Map.cs" />
+    <Compile Include="Package.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Routine.cs" />
     <Compile Include="Statistical.cs" />
+    <Compile Include="TcpConnection.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="TimesValues.cs" />
     <Compile Include="User.cs" />

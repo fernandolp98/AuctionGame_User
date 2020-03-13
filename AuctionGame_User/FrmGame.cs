@@ -10,8 +10,12 @@ namespace AuctionGame_User
 {
     public partial class FrmGame : Form
     {
-        public int Xclick, Yclick;
-        Font font = new Font(new FontFamily("Comic Sans MS"), 14, FontStyle.Regular);
+        private static readonly TcpConnection TcpConnection = new TcpConnection();
+        private static readonly string _ipaddress = "127.0.0.1";
+        private const int Port = 1698;
+
+        private int Xclick, Yclick;
+        Font _font = new Font(new FontFamily("Comic Sans MS"), 14, FontStyle.Regular);
 
         private List<Product> _products;
         private List<Family> _families;
@@ -38,12 +42,9 @@ namespace AuctionGame_User
 
         private bool firstBidd = true;
 
-        public FrmGame(User player, Routine routine)
+        public FrmGame(User player)
         {
             InitializeComponent();
-            _products = routine.AllProducts;
-            _families = routine.Families;
-            _virtualBidders = routine.VirtualBidders;
             _player = player;
             lblPlayerName.Text = _player.Bidder.NameBidder;
             lblMoney.Text = _player.Bidder.Wallet.ToString();
@@ -51,13 +52,39 @@ namespace AuctionGame_User
 
         private void pboxCloseForm_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Environment.Exit(0);
         }
 
         private void FrmGame_Load(object sender, EventArgs e)
         {
-            LoadProducts();
-            LoadFamilies();
+            TcpConnection.OnDataRecieved += MensajeRecibido;
+
+            if (!TcpConnection.Connectar(_ipaddress, Port))
+            {
+                MessageBox.Show("Error conectando con el servidor! ");
+                return;
+            }
+        }
+        private void MensajeRecibido(string datos)
+        {
+            var paquete = new Package(datos);
+            var comando = paquete.Command;
+            if (comando == "connectionResultOk")
+            {
+                var contenido = paquete.Content;
+                var values = Map.Deserialize(contenido);
+                var routine = Routine.GetRoutineById(int.Parse(values[1]));
+                _products = routine.AllProducts;
+                _families = routine.Families;
+                _virtualBidders = routine.VirtualBidders;
+
+
+                Invoke(new Action(() =>
+                {
+                    LoadProducts();
+                    LoadFamilies();
+                }));
+            }
         }
         private void AddProductsToPanel(List<Product> products, Panel panel)
         {
@@ -73,7 +100,7 @@ namespace AuctionGame_User
                     Height = 60,
                     TextAlign = ContentAlignment.BottomCenter,
                     BackColor = Color.Transparent,
-                    Font = font,
+                    Font = _font,
                     ForeColor = Color.Azure
                 };
                 var pbox = new PictureBox
@@ -105,7 +132,7 @@ namespace AuctionGame_User
                 Height = 60,
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = Color.Transparent,
-                Font = font,
+                Font = _font,
                 ForeColor = Color.Yellow
             });
             pnlProducts.VerticalScroll.Visible = false;
