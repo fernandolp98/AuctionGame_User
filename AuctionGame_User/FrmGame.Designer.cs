@@ -332,7 +332,6 @@
             this.pboxPlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pboxPlay.TabIndex = 16;
             this.pboxPlay.TabStop = false;
-            this.pboxPlay.Click += new System.EventHandler(this.pboxPlay_Click);
             // 
             // pboxDecrementValueOffer
             // 

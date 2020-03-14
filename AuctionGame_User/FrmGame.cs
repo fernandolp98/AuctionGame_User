@@ -11,11 +11,11 @@ namespace AuctionGame_User
     public partial class FrmGame : Form
     {
         private static readonly TcpConnection TcpConnection = new TcpConnection();
-        private static readonly string _ipaddress = "127.0.0.1";
+        private static readonly string Ipaddress = "127.0.0.1";
         private const int Port = 1698;
 
-        private int Xclick, Yclick;
-        Font _font = new Font(new FontFamily("Comic Sans MS"), 14, FontStyle.Regular);
+        private int _xclick, _yclick;
+        readonly Font _font = new Font(new FontFamily("Comic Sans MS"), 14, FontStyle.Regular);
 
         private List<Product> _products;
         private List<Family> _families;
@@ -23,31 +23,31 @@ namespace AuctionGame_User
 
         private User _player;
 
-        private int initialMinutes =0, initialSeconds = 15;
-        private int predeterminatedMinutes, predeterminatedSeconds;
-        private int seconds, minutes;
+        //private int initialMinutes =0, initialSeconds = 15;
+        //private int predeterminatedMinutes, predeterminatedSeconds;
+        //private int seconds, minutes;
 
-        private int _currentProductIndex;
-        private Product _currentProduct;
+        //private int _currentProductIndex;
+        //private Product _currentProduct;
 
-        private decimal _lastOffert;
-        private int _roundActivity;
-        private int _round;
+        //private decimal _lastOffert;
+        //private int _roundActivity;
+        //private int _round;
 
-        private int _currentWinner;
+        //private int _currentWinner;
 
-        private bool _activeAuction;
+        //private bool _activeAuction;
 
-        private string log;
+        //private string log;
 
-        private bool firstBidd = true;
+        //private bool firstBidd = true;
 
-        public FrmGame(User player)
+        private string _namePlayer;
+
+        public FrmGame(string namePlayer)
         {
             InitializeComponent();
-            _player = player;
-            lblPlayerName.Text = _player.Bidder.NameBidder;
-            lblMoney.Text = _player.Bidder.Wallet.ToString();
+            _namePlayer = namePlayer;
         }
 
         private void pboxCloseForm_Click(object sender, EventArgs e)
@@ -59,28 +59,40 @@ namespace AuctionGame_User
         {
             TcpConnection.OnDataRecieved += MensajeRecibido;
 
-            if (!TcpConnection.Connectar(_ipaddress, Port))
+            if (TcpConnection.Connectar(Ipaddress, Port))
             {
-                MessageBox.Show("Error conectando con el servidor! ");
-                return;
+                var package = new Package("newUser", _namePlayer);
+                TcpConnection.EnviarPaquete(package);
             }
+            else
+            {
+                MessageBox.Show(@"¡Error conectando con el servidor! ");
+                this.Close();
+            }
+
         }
         private void MensajeRecibido(string datos)
         {
             var paquete = new Package(datos);
             var comando = paquete.Command;
-            if (comando == "connectionResultOk")
+            if (comando == "connectionResultOk") //Se recibe información del juego idUser|idRutina|tiempoInicial
             {
                 var contenido = paquete.Content;
                 var values = Map.Deserialize(contenido);
+                _player = User.GetUserById(int.Parse(values[0]));
                 var routine = Routine.GetRoutineById(int.Parse(values[1]));
                 _products = routine.AllProducts;
                 _families = routine.Families;
                 _virtualBidders = routine.VirtualBidders;
+                var time = new Time(values[2], "ss");
 
 
                 Invoke(new Action(() =>
                 {
+                    _player.Wallet = decimal.Parse(values[2]);
+                    lblPlayerName.Text = _player.NameBidder;
+                    lblMoney.Text = _player.Wallet.ToString(CultureInfo.InvariantCulture);
+                    txbClock.Text = time.Format("mm:ss");
                     LoadProducts();
                     LoadFamilies();
                 }));
@@ -180,11 +192,11 @@ namespace AuctionGame_User
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Left)
-            { Xclick = e.X; Yclick = e.Y; }
+            { _xclick = e.X; _yclick = e.Y; }
             else
             {
-                Left += (e.X - Xclick);
-                Top += (e.Y - Yclick);
+                Left += (e.X - _xclick);
+                Top += (e.Y - _yclick);
             }
         }
 
@@ -212,80 +224,6 @@ namespace AuctionGame_User
             pnlProductInformation.Visible = true;
         }
 
-        [Obsolete]
-        private void pboxPlay_Click(object sender, EventArgs e)
-        {
-            using (Semaphore semaphore = new Semaphore(1, 1, "Semaphore"))
-            {
-
-                if (_virtualBidders != null && firstBidd)
-                    foreach (var vb in _virtualBidders)
-                    {
-                        Thread thread = new Thread(() => ManagerBidder(vb));
-                        vb.Hilo = thread;
-                        vb.Hilo.Start();
-                    }
-                else
-                    foreach (var vb in _virtualBidders)
-                    {
-                        vb.Hilo.Resume();
-                    }
-                firstBidd = false;
-                nextBid();
-            }
-            //pb.Visible = false;
-        }
-        private void nextBid()
-        {
-            if (_products.Count > 0 && _currentProductIndex < _products.Count)
-            {
-                txbClock.BackColor = Color.Green;
-                seconds = predeterminatedSeconds = initialSeconds;
-                minutes = predeterminatedMinutes = initialMinutes;
-                //Selecciona el siguiente producto
-                _currentProduct = _products.ElementAt(_currentProductIndex);
-                _currentProductIndex++;
-                pboxCurrentProduct.Image = _currentProduct.ImageProduct;
-                _lastOffert = _currentProduct.Price; //variables para modificar los datos de la barra de estadisticas
-                _roundActivity = 0; //numero de ofertas en una ronda
-                _round = 1; //numero de ronda actual
-                txbLastOffer.Text = _currentProduct.Price.ToString();
-                lblCurrentNameProduct.Text = _currentProduct.Name;
-                addText($"Inicia subasta por ", Color.Black, true);
-                addText(_currentProduct.Name, Color.Red, false);
-                addText($"\nPrecio Inicial ", Color.Black, false);
-                addText(_currentProduct.Price.ToString(), Color.Red, false);
-                addText($"\nInicia Round 1\n", Color.Black, false);
-
-                lblAuctionNumber.Text = _currentProductIndex.ToString();
-                lblRoundNumber.Text = _round.ToString();
-
-                _currentWinner = 0;
-                if (_virtualBidders != null)
-                    foreach (VirtualBidder vb in _virtualBidders)
-                    {
-                        vb.OutBidder = false;
-                        vb.Offert = 0;
-                        vb.ParticipationsRound = 0;
-                        vb.Rounds = 0;
-                    }
-                _activeAuction = true;
-                timerAuction.Start();
-                _player.Bidder.ParticipationsRound = 0;
-                _player.Bidder.OutBidder = false;
-                _player.Bidder.Rounds = 0;
-                _player.Bidder.Offert = 0;
-                _player.Bidder.LastBiddTime = DateTime.Now;
-
-            }
-            else
-            {
-                MessageBox.Show("Ya no existen productos por subastar");
-                _activeAuction = false;
-                finishGame();
-            }
-        }
-
         private void timerAuction_Tick(object sender, EventArgs e)
         {//funcion tick que se ejecuta aca intervalo de tiempo (la tenemos en 1000 = 1 segundo)
             // codigo para controlar el cronometro
@@ -294,22 +232,22 @@ namespace AuctionGame_User
             {
                 if (_roundActivity < 2) //Cuando la actividad de la ronda es menor a 2, termina la subasta 
                 {
-                    _player.Statistics.AddRoundsForBidd(_player.Bidder.Rounds);
-                    _player.Statistics.AddBiddForRound(_player.Bidder.ParticipationsRound);
+                    _player.Statistics.AddRoundsForBidd(_player.Rounds);
+                    _player.Statistics.AddBiddForRound(_player.ParticipationsRound);
 
 
 
                     addText($"Termina subasta, gana {_currentWinner}. \n", Color.Blue, true);
                     timerAuction.Stop();//se detiene la variable tiempo
                     txbClock.BackColor = Color.Red;//cambia el color del reloj
-                    if (_currentWinner == _player.Bidder.IdBidder)//si el ganador es el jugador
+                    if (_currentWinner == _player.IdBidder)//si el ganador es el jugador
                     {
                         _player.ProductsEarned.Add(_currentProduct);
                         VerifyFamiliesEarned();
-                        _player.Bidder.Wallet = _player.Bidder.Wallet - _player.Bidder.Offert;// se le descuenta de su cartera el monto ofertado
-                        _player.Bidder.Points += _currentProduct.Points;
-                        lblPoints.Text = _player.Bidder.Points.ToString();
-                        lblMoney.Text = _player.Bidder.Wallet.ToString();
+                        _player.Wallet = _player.Wallet - _player.Offert;// se le descuenta de su cartera el monto ofertado
+                        _player.Points += _currentProduct.Points;
+                        lblPoints.Text = _player.Points.ToString();
+                        lblMoney.Text = _player.Wallet.ToString();
                         _player.Statistics.BidWin++;
                     }
                     else
@@ -377,12 +315,12 @@ namespace AuctionGame_User
                         vb.ParticipationsRound = 0;//LA PARTICIPACIPON DE LA NUEVA RONDA SE CAMBIA A 0                    
                     }
                     //si el jugador no participo en la ronda anterior
-                    if (_player.Bidder.ParticipationsRound == 0)
+                    if (_player.ParticipationsRound == 0)
                     {
-                        _player.Bidder.OutBidder = true;//queda fuera de la subasta
+                        _player.OutBidder = true;//queda fuera de la subasta
                     }
-                    _player.Statistics.AddBiddForRound(_player.Bidder.ParticipationsRound);
-                    _player.Bidder.ParticipationsRound = 0;
+                    _player.Statistics.AddBiddForRound(_player.ParticipationsRound);
+                    _player.ParticipationsRound = 0;
                 }
             }
             else //Continua la ronda
@@ -400,8 +338,6 @@ namespace AuctionGame_User
                 txbClock.Text = time.Format("mm:ss");
 
             }
-
-            //cambiar etiqueta de tiempo lblClock
         }
         private void VerifyFamiliesEarned()
         {
@@ -419,8 +355,8 @@ namespace AuctionGame_User
                 if (productsEarnedCount == family.Products.Count)
                 {
                     MessageBox.Show($"Ganaste {family.Points} puntos por haber completado los productos de la familia {family.NameFamily}");
-                    _player.Bidder.Points += family.Points;
-                    lblPoints.Text = _player.Bidder.Points.ToString();
+                    _player.Points += family.Points;
+                    lblPoints.Text = _player.Points.ToString();
                 }
             }
         }
@@ -484,23 +420,23 @@ namespace AuctionGame_User
             if (!_activeAuction) return;
             var newOffer = decimal.Parse(txbOffer.Text);
             var increase = newOffer - _lastOffert;
-            if (newOffer > _lastOffert && newOffer <= _player.Bidder.Wallet && _player.Bidder.OutBidder == false)
+            if (newOffer > _lastOffert && newOffer <= _player.Wallet && _player.OutBidder == false)
             {
-                TimeSpan timeBetweenBidd = DateTime.Now - _player.Bidder.LastBiddTime;
-                _player.Bidder.LastBiddTime = DateTime.Now;
+                TimeSpan timeBetweenBidd = DateTime.Now - _player.LastBiddTime;
+                _player.LastBiddTime = DateTime.Now;
                 int secondsBetweenBidd = timeBetweenBidd.Seconds;
 
                 //se le asigna el valor del campo TxtBoxValueOffert a la variable My ofert
-                _player.Bidder.Offert = newOffer;//Int32.Parse(TxtBoxValueOffert.Text);
+                _player.Offert = newOffer;//Int32.Parse(TxtBoxValueOffert.Text);
 
-                txbLastOfferPlayer.Text = _player.Bidder.Offert.ToString();//se cambia el dato de mi ultima oferta en el campo de texto de la barra de estadisticas
+                txbLastOfferPlayer.Text = _player.Offert.ToString();//se cambia el dato de mi ultima oferta en el campo de texto de la barra de estadisticas
 
                 //se cambian los valores del campo de ultima oferta
 
-                UpdateBid(_player.Bidder);
+                UpdateBid(_player);
 
 
-                _player.Bidder.UpdateParticipation();// se actualiza la participacion del jugador
+                _player.UpdateParticipation();// se actualiza la participacion del jugador
 
                 _player.Statistics.AddIncreaseForBidd(increase);
                 _player.Statistics.AddSecondsBetweenBidd(secondsBetweenBidd);
@@ -509,74 +445,16 @@ namespace AuctionGame_User
 
         private void finishGame()
         {
-            foreach(var vb in _virtualBidders)
-            {
-                vb.Hilo.Abort();
-            }
-            _player.Statistics.Points = _player.Bidder.Points;
-            _player.Statistics.Wallet = _player.Bidder.Wallet;
-            _player.Statistics.Log = log;
-            _player.Statistics.Results();
+            //foreach(var vb in _virtualBidders)
+            //{
+            //    vb.Hilo.Abort();
+            //}
+            //_player.Statistics.Points = _player.Bidder.Points;
+            //_player.Statistics.Wallet = _player.Bidder.Wallet;
+            //_player.Statistics.Log = log;
+            //_player.Statistics.Results();
         }
-        private void addText(string text, Color color, bool hora)
-        {
-            /*rtxbPujas.SelectionStart = rtxbPujas.TextLength;
-            rtxbPujas.SelectionColor = color;
-            if (hora)
-                rtxbPujas.AppendText($"{DateTime.Now.ToString("HH:mm:ss")} -> {text} ");
-            else
-                rtxbPujas.AppendText($"{text}");
-            rtxbPujas.ScrollToCaret();*/
-            if (string.IsNullOrEmpty(log))
-                log = "";
-            if (hora)
-               log += $"{DateTime.Now.ToString("HH:mm:ss")} -> {text} ";
-            else
-                log += $"{text}";
-            Console.WriteLine(log);
-        }
-        private void ManagerBidder(VirtualBidder vb)
-        {
-            try
-            {
-                using (Semaphore semaphore = Semaphore.OpenExisting("Semaphore"))
-                {
-                    Thread.Sleep(vb.Role.TimeToBid.FinallyValue * 1000);
 
-                    while (true)
-                    {
-                        if (!vb.OutBidder)//si el bidder no esta fuera
-                        {
-                            if (minutes != 0 || seconds != 0)
-                            {
-                                semaphore.WaitOne();
-                                //aumenta el tamaño de size para pasar al siguiente bidder
-                                Console.WriteLine($"{vb.IdBidder} va a apostar...");
-                                if (vb.WantToBid(_lastOffert, _currentWinner, _round))// si cambia el ultimo apostador ganador se modifican las etiquetas
-                                {
-                                    UpdateBid(vb);
-
-                                    Thread.Sleep(2000);//Le da un margen de 2 segundos entre jugadores para evitar el solapamiento
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"{vb.IdBidder} no pudo apostar...");
-
-                                }
-                                semaphore.Release();
-                                Thread.Sleep(vb.Role.TimeToBid.NewFinallyValue() * 1000);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
-        }
         private void UpdateBid(Bidder bidder)
         {
             _currentWinner = bidder.IdBidder;

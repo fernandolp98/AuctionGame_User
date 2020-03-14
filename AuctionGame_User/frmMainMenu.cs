@@ -28,17 +28,7 @@ namespace AuctionGame_User
         }
         private void frmMainMenu_Load(object sender, EventArgs e)
         {
-            try
-            {
-                var routines = Routine.GetAllRoutines();
-                cboRoutines.DataSource = routines;
-                cboRoutines.DisplayMember = "NameRoutine";
-                cboRoutines.ValueMember = "IdRoutine";
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
 
         }
         private bool ValidData()
@@ -46,36 +36,16 @@ namespace AuctionGame_User
             var controls = new object[]
             {
                 txbName,
-                txbInitialWallet
             };
             return !_dataControl.Validar(controls);
         }
         private void btnPlay_Click(object sender, EventArgs e)
         {
             if (!ValidData()) return;
-            var query = $"SELECT insert_user('{txbName.Text}', {txbInitialWallet.Text})";
-            var idUserTable = DbConnection.consultar_datos(query);
-            if (idUserTable == null) return;
-            var idUser = (int)idUserTable.Rows[0][0];
-            query = $"SELECT BIDDER_idBidder, idStats FROM user WHERE idUser = {idUser}";
-            var idResults = DbConnection.consultar_datos(query);
-            if (idResults == null) return;
-            var player = new User
-            {
-                IdUser = idUser,
-                Bidder =
-                {
-                    NameBidder = txbName.Text,
-                    Wallet = decimal.Parse(txbInitialWallet.Text),
-                    IdBidder = (int) idResults.Rows[0][0]
-                },
-                Statistics = {IdStatistical = (int) idResults.Rows[0][1]}
-            };
-            var routine = (Routine)cboRoutines.SelectedItem;
-                        
-
-            var game = new FrmGame(player);
-            game.Show();
+            var game = new FrmGame(txbName.Text);
+            Hide();
+            game.ShowDialog();
+            Show();
         }
 
         private void txbName_Validated(object sender, EventArgs e)

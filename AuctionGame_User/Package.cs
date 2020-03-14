@@ -24,7 +24,7 @@ namespace AuctionGame_User
         {
             var sepIndex = datos.IndexOf(":", StringComparison.Ordinal);
             Command = datos.Substring(0, sepIndex);
-            Content = datos.Substring(Command.Length);
+            Content = datos.Substring(Command.Length + 1);
         }
         public string Serializar()
         {
