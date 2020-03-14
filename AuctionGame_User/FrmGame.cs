@@ -30,13 +30,13 @@ namespace AuctionGame_User
         //private int _currentProductIndex;
         //private Product _currentProduct;
 
-        //private decimal _lastOffert;
+        private decimal _lastOffert;
         //private int _roundActivity;
         //private int _round;
 
         //private int _currentWinner;
 
-        //private bool _activeAuction;
+        private bool _activeAuction;
 
         //private string log;
 
@@ -224,121 +224,6 @@ namespace AuctionGame_User
             pnlProductInformation.Visible = true;
         }
 
-        private void timerAuction_Tick(object sender, EventArgs e)
-        {//funcion tick que se ejecuta aca intervalo de tiempo (la tenemos en 1000 = 1 segundo)
-            // codigo para controlar el cronometro
-
-            if (seconds == 0 && minutes == 0)//si minutos y segundos llegana 0 se detiene el cronometro
-            {
-                if (_roundActivity < 2) //Cuando la actividad de la ronda es menor a 2, termina la subasta 
-                {
-                    _player.Statistics.AddRoundsForBidd(_player.Rounds);
-                    _player.Statistics.AddBiddForRound(_player.ParticipationsRound);
-
-
-
-                    addText($"Termina subasta, gana {_currentWinner}. \n", Color.Blue, true);
-                    timerAuction.Stop();//se detiene la variable tiempo
-                    txbClock.BackColor = Color.Red;//cambia el color del reloj
-                    if (_currentWinner == _player.IdBidder)//si el ganador es el jugador
-                    {
-                        _player.ProductsEarned.Add(_currentProduct);
-                        VerifyFamiliesEarned();
-                        _player.Wallet = _player.Wallet - _player.Offert;// se le descuenta de su cartera el monto ofertado
-                        _player.Points += _currentProduct.Points;
-                        lblPoints.Text = _player.Points.ToString();
-                        lblMoney.Text = _player.Wallet.ToString();
-                        _player.Statistics.BidWin++;
-                    }
-                    else
-                    {
-                        //ListViewItem item = lvwProductsForEarn.Items.Find(productoActual.id_product.ToString(), false)[0];
-                        //item.BackColor = Color.Red;
-                    }
-                    if (_virtualBidders != null)
-                        for (int index = 0; index < _virtualBidders.Count(); index++) //for  para recorrer el array de bidders
-                        {
-                            var vb = _virtualBidders.ElementAt(index);
-                            vb.OutBidder = false;//se cambia la variable bidder fuera a false para que continuen en la nueva subasta
-                            if (vb.IdBidder == _currentWinner)//si el id del bidder es igual al registrado como ganador
-                            {
-                                //se le resta el monto de la offerta a su cartera
-                                vb.Wallet -= vb.Offert;
-                            }
-                            vb.Hilo.Suspend();
-                        }
-                }
-                else //Se inicia una nueva ronda
-                {
-                    addText($"Inicia ronda {_round + 1}\n", Color.Black, true);
-                    foreach (var vb in _virtualBidders)
-                    {
-                        if (!vb.OutBidder)
-                        {
-                            vb.Role.OffertsForRound.GetNewFinallyValue();
-                        }
-                    }
-                    _roundActivity = 0;// se inicializa la actividad en la ronda
-                    _round++;//se aumenta el round
-                    lblRoundNumber.Text = _round.ToString();
-                    if (predeterminatedMinutes == 0)//si los minutos que se dan de manera predeterminada llegan a 0
-                    {
-                        if (predeterminatedSeconds > 20)//si los segundos que se dan de manera predeterminada son mas de 20
-                        {
-                            predeterminatedSeconds -= 10;//se van restando 10 segundos por ronda
-                        }
-                        else
-                        {
-                            predeterminatedSeconds = 15;//se limita a 15 segundos la ronda
-                        }
-                    }
-                    else if (predeterminatedMinutes == 1)
-                    {
-                        predeterminatedMinutes--;
-                        predeterminatedSeconds = 50;
-                    }
-                    else
-                    {
-                        predeterminatedMinutes--;//disminuyen los minutos que se dan de manera predeterminada
-                    }
-                    //se igualan los minutos y segundos a los predeterminados
-                    minutes = predeterminatedMinutes;
-                    seconds = predeterminatedSeconds;
-                    //for para recalcular el tiempo de las apuestas
-                    for (int index = 0; index < _virtualBidders.Count(); index++) //for  para recorrer el array de bidders
-                    {
-                        var vb = _virtualBidders.ElementAt(index);
-                        if (vb.ParticipationsRound == 0)
-                        {
-                            vb.OutBidder = true;//SE CAMBIA LA VARIABLE DE BIDDER FUERA A TRUE
-                        }
-                        vb.ParticipationsRound = 0;//LA PARTICIPACIPON DE LA NUEVA RONDA SE CAMBIA A 0                    
-                    }
-                    //si el jugador no participo en la ronda anterior
-                    if (_player.ParticipationsRound == 0)
-                    {
-                        _player.OutBidder = true;//queda fuera de la subasta
-                    }
-                    _player.Statistics.AddBiddForRound(_player.ParticipationsRound);
-                    _player.ParticipationsRound = 0;
-                }
-            }
-            else //Continua la ronda
-            {
-                //aumentar segundos
-                seconds -= 1;
-                //si los segundos son -1
-                if (seconds == -1)
-                {   //DISMINUYE 1 minutos
-                    minutes -= 1;
-                    //regresa a 59 segundos
-                    seconds = 59;
-                }
-                var time = new Time(0, minutes, seconds);
-                txbClock.Text = time.Format("mm:ss");
-
-            }
-        }
         private void VerifyFamiliesEarned()
         {
             foreach (var family in _families)
@@ -433,7 +318,7 @@ namespace AuctionGame_User
 
                 //se cambian los valores del campo de ultima oferta
 
-                UpdateBid(_player);
+                UpdateBidd(_player);
 
 
                 _player.UpdateParticipation();// se actualiza la participacion del jugador
@@ -455,35 +340,9 @@ namespace AuctionGame_User
             //_player.Statistics.Results();
         }
 
-        private void UpdateBid(Bidder bidder)
+        private void UpdateBidd(Bidder bidder)
         {
-            _currentWinner = bidder.IdBidder;
-            _lastOffert = bidder.Offert;
-            if (txbLastOffer.InvokeRequired)
-            {
-                txbLastOffer.Invoke(new MethodInvoker(delegate
-                {
-                    txbLastOffer.Text = _lastOffert.ToString();
-                }));
-            }
-            else
-            {
-                txbLastOffer.Text = _lastOffert.ToString();
-            }
-            if (txbCurrentWinner.InvokeRequired)
-            {
-                txbCurrentWinner.Invoke(new MethodInvoker(delegate
-                {
-                    txbCurrentWinner.Text = _currentWinner.ToString();
-                }));
-            }
-            else
-            {
-                txbCurrentWinner.Text = _currentWinner.ToString();
-            }
-            _roundActivity++;
-            string newPuja = bidder.IdBidder + " : " + _lastOffert + "\n";
-            addText(newPuja, Color.Red, true);
+
 
         }
 

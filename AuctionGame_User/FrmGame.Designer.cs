@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmGame));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblPlayerName = new System.Windows.Forms.Label();
@@ -43,9 +42,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.timerAuction = new System.Windows.Forms.Timer(this.components);
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pboxPlay = new System.Windows.Forms.PictureBox();
             this.pboxDecrementValueOffer = new System.Windows.Forms.PictureBox();
             this.pboxIncreaseValueOffer = new System.Windows.Forms.PictureBox();
             this.pboDecrementBid = new System.Windows.Forms.PictureBox();
@@ -86,7 +83,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pboxCloseForm)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxPlay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxDecrementValueOffer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxIncreaseValueOffer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboDecrementBid)).BeginInit();
@@ -141,11 +137,11 @@
             this.txbClock.AutoSize = true;
             this.txbClock.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txbClock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.txbClock.Font = new System.Drawing.Font("DS-Digital", 42F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbClock.Font = new System.Drawing.Font("Microsoft Sans Serif", 42F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbClock.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.txbClock.Location = new System.Drawing.Point(431, 6);
             this.txbClock.Name = "txbClock";
-            this.txbClock.Size = new System.Drawing.Size(154, 58);
+            this.txbClock.Size = new System.Drawing.Size(175, 66);
             this.txbClock.TabIndex = 0;
             this.txbClock.Text = "00:00";
             // 
@@ -175,11 +171,11 @@
             this.lblPoints.AutoSize = true;
             this.lblPoints.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblPoints.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblPoints.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPoints.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblPoints.Location = new System.Drawing.Point(885, 31);
             this.lblPoints.Name = "lblPoints";
-            this.lblPoints.Size = new System.Drawing.Size(65, 28);
+            this.lblPoints.Size = new System.Drawing.Size(54, 31);
             this.lblPoints.TabIndex = 8;
             this.lblPoints.Text = "000";
             this.lblPoints.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -192,11 +188,11 @@
             this.lblMoney.AutoSize = true;
             this.lblMoney.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMoney.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblMoney.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMoney.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMoney.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblMoney.Location = new System.Drawing.Point(648, 34);
             this.lblMoney.Name = "lblMoney";
-            this.lblMoney.Size = new System.Drawing.Size(116, 28);
+            this.lblMoney.Size = new System.Drawing.Size(86, 31);
             this.lblMoney.TabIndex = 7;
             this.lblMoney.Text = "000.00";
             this.lblMoney.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -209,11 +205,11 @@
             this.lblRoundNumber.AutoSize = true;
             this.lblRoundNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblRoundNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblRoundNumber.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRoundNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRoundNumber.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblRoundNumber.Location = new System.Drawing.Point(234, 34);
             this.lblRoundNumber.Name = "lblRoundNumber";
-            this.lblRoundNumber.Size = new System.Drawing.Size(65, 28);
+            this.lblRoundNumber.Size = new System.Drawing.Size(54, 31);
             this.lblRoundNumber.TabIndex = 6;
             this.lblRoundNumber.Text = "000";
             this.lblRoundNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -226,11 +222,11 @@
             this.lblAuctionNumber.AutoSize = true;
             this.lblAuctionNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblAuctionNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblAuctionNumber.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAuctionNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAuctionNumber.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblAuctionNumber.Location = new System.Drawing.Point(37, 34);
             this.lblAuctionNumber.Name = "lblAuctionNumber";
-            this.lblAuctionNumber.Size = new System.Drawing.Size(65, 28);
+            this.lblAuctionNumber.Size = new System.Drawing.Size(54, 31);
             this.lblAuctionNumber.TabIndex = 5;
             this.lblAuctionNumber.Text = "000";
             this.lblAuctionNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -243,11 +239,11 @@
             this.label5.AutoSize = true;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label5.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Yellow;
             this.label5.Location = new System.Drawing.Point(859, 3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(122, 28);
+            this.label5.Size = new System.Drawing.Size(95, 31);
             this.label5.TabIndex = 4;
             this.label5.Text = "Puntos";
             // 
@@ -259,11 +255,11 @@
             this.label4.AutoSize = true;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label4.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Yellow;
             this.label4.Location = new System.Drawing.Point(645, 6);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(122, 28);
+            this.label4.Size = new System.Drawing.Size(93, 31);
             this.label4.TabIndex = 3;
             this.label4.Text = "Dinero";
             // 
@@ -275,11 +271,11 @@
             this.label3.AutoSize = true;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Yellow;
             this.label3.Location = new System.Drawing.Point(217, 6);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 28);
+            this.label3.Size = new System.Drawing.Size(91, 31);
             this.label3.TabIndex = 2;
             this.label3.Text = "Round";
             // 
@@ -291,23 +287,17 @@
             this.label2.AutoSize = true;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Font = new System.Drawing.Font("Atomic Clock Radio", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Yellow;
             this.label2.Location = new System.Drawing.Point(3, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 28);
+            this.label2.Size = new System.Drawing.Size(109, 31);
             this.label2.TabIndex = 1;
             this.label2.Text = "Subasta";
-            // 
-            // timerAuction
-            // 
-            this.timerAuction.Interval = 1000;
-            this.timerAuction.Tick += new System.EventHandler(this.timerAuction_Tick);
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(53)))), ((int)(((byte)(80)))));
-            this.panel3.Controls.Add(this.pboxPlay);
             this.panel3.Controls.Add(this.pboxDecrementValueOffer);
             this.panel3.Controls.Add(this.pboxIncreaseValueOffer);
             this.panel3.Controls.Add(this.pboDecrementBid);
@@ -322,16 +312,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1026, 90);
             this.panel3.TabIndex = 3;
-            // 
-            // pboxPlay
-            // 
-            this.pboxPlay.Image = global::AuctionGame_User.Properties.Resources.jugar;
-            this.pboxPlay.Location = new System.Drawing.Point(936, 18);
-            this.pboxPlay.Name = "pboxPlay";
-            this.pboxPlay.Size = new System.Drawing.Size(60, 60);
-            this.pboxPlay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pboxPlay.TabIndex = 16;
-            this.pboxPlay.TabStop = false;
             // 
             // pboxDecrementValueOffer
             // 
@@ -787,7 +767,6 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pboxPlay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxDecrementValueOffer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxIncreaseValueOffer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboDecrementBid)).EndInit();
@@ -818,7 +797,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Timer timerAuction;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel pnlProducts;
         private System.Windows.Forms.Panel pnlFamilies;
@@ -854,7 +832,6 @@
         private System.Windows.Forms.Label lblCurrentNameProduct;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.PictureBox pboxPlay;
         private System.Windows.Forms.TextBox txbCurrentWinner;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblPlayerName;
