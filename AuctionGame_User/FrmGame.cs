@@ -89,12 +89,29 @@ namespace AuctionGame_User
 
                 Invoke(new Action(() =>
                 {
-                    _player.Wallet = decimal.Parse(values[2]);
                     lblPlayerName.Text = _player.NameBidder;
                     lblMoney.Text = _player.Wallet.ToString(CultureInfo.InvariantCulture);
                     txbClock.Text = time.Format("mm:ss");
                     LoadProducts();
                     LoadFamilies();
+                }));
+            }
+            if (comando == "biddOk")
+            {
+                Invoke(new Action(() =>
+                {
+                    txbLastOfferPlayer.Text = paquete.Content;
+
+                }));
+            }
+
+            if (comando == "updateBidd")
+            {
+                var values = Map.Deserialize(paquete.Content);
+                Invoke(new Action(() =>
+                {
+                    txbCurrentWinner.Text = values[0];
+                    txbLastOffer.Text = values[1];
                 }));
             }
         }
@@ -224,28 +241,6 @@ namespace AuctionGame_User
             pnlProductInformation.Visible = true;
         }
 
-        private void VerifyFamiliesEarned()
-        {
-            foreach (var family in _families)
-            {
-                int productsEarnedCount = 0;
-                foreach (var productEarned in  _player.ProductsEarned)
-                {
-                    foreach (var productNeccesary in family.Products)
-                    {
-                        if (productNeccesary.Equals(productEarned))
-                            productsEarnedCount++;
-                    }
-                }
-                if (productsEarnedCount == family.Products.Count)
-                {
-                    MessageBox.Show($"Ganaste {family.Points} puntos por haber completado los productos de la familia {family.NameFamily}");
-                    _player.Points += family.Points;
-                    lblPoints.Text = _player.Points.ToString();
-                }
-            }
-        }
-
         private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
         {
             finishGame();
@@ -302,30 +297,13 @@ namespace AuctionGame_User
 
         private void pboxBid_Click(object sender, EventArgs e)
         {
-            if (!_activeAuction) return;
+
+            //if (!_activeAuction) return;
+
             var newOffer = decimal.Parse(txbOffer.Text);
-            var increase = newOffer - _lastOffert;
-            if (newOffer > _lastOffert && newOffer <= _player.Wallet && _player.OutBidder == false)
-            {
-                TimeSpan timeBetweenBidd = DateTime.Now - _player.LastBiddTime;
-                _player.LastBiddTime = DateTime.Now;
-                int secondsBetweenBidd = timeBetweenBidd.Seconds;
 
-                //se le asigna el valor del campo TxtBoxValueOffert a la variable My ofert
-                _player.Offert = newOffer;//Int32.Parse(TxtBoxValueOffert.Text);
-
-                txbLastOfferPlayer.Text = _player.Offert.ToString();//se cambia el dato de mi ultima oferta en el campo de texto de la barra de estadisticas
-
-                //se cambian los valores del campo de ultima oferta
-
-                UpdateBidd(_player);
-
-
-                _player.UpdateParticipation();// se actualiza la participacion del jugador
-
-                _player.Statistics.AddIncreaseForBidd(increase);
-                _player.Statistics.AddSecondsBetweenBidd(secondsBetweenBidd);
-            }
+            var package = new Package("newBidd", newOffer.ToString(CultureInfo.InvariantCulture));
+            TcpConnection.EnviarPaquete(package);
         }
 
         private void finishGame()
@@ -338,12 +316,6 @@ namespace AuctionGame_User
             //_player.Statistics.Wallet = _player.Bidder.Wallet;
             //_player.Statistics.Log = log;
             //_player.Statistics.Results();
-        }
-
-        private void UpdateBidd(Bidder bidder)
-        {
-
-
         }
 
         private void btnFamily_Click(object o, EventArgs e)

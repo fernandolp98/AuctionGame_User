@@ -37,11 +37,9 @@ namespace AuctionGame_User
             }
             catch (Exception e)
             {
-                if (OnError != null)
-                {
-                    OnError(e);
-                    System.Windows.Forms.MessageBox.Show(e.Message);
-                }
+                if (OnError == null) return false;
+                OnError(e);
+                System.Windows.Forms.MessageBox.Show(e.Message);
                 return false;
             }
         }
