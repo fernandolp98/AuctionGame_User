@@ -34,8 +34,8 @@
             this.pboxCloseForm = new System.Windows.Forms.PictureBox();
             this.txbClock = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblPoints = new System.Windows.Forms.Label();
-            this.lblMoney = new System.Windows.Forms.Label();
+            this.lblPointsUser = new System.Windows.Forms.Label();
+            this.lblMoneyUser = new System.Windows.Forms.Label();
             this.lblRoundNumber = new System.Windows.Forms.Label();
             this.lblAuctionNumber = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,7 +45,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.pboxDecrementValueOffer = new System.Windows.Forms.PictureBox();
             this.pboxIncreaseValueOffer = new System.Windows.Forms.PictureBox();
-            this.pboDecrementBid = new System.Windows.Forms.PictureBox();
+            this.pboxDecrementBid = new System.Windows.Forms.PictureBox();
             this.pboxIncreaseBid = new System.Windows.Forms.PictureBox();
             this.txbIncreaseOffert = new System.Windows.Forms.TextBox();
             this.txbOffer = new System.Windows.Forms.TextBox();
@@ -69,7 +69,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.pboxCurrentProduct = new System.Windows.Forms.PictureBox();
-            this.lblPointsProductOfferded = new System.Windows.Forms.Label();
+            this.lblCurrentPointsProduct = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.lblCurrentPriceProduct = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -85,7 +85,7 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxDecrementValueOffer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxIncreaseValueOffer)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboDecrementBid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxDecrementBid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxIncreaseBid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxBid)).BeginInit();
             this.pnlProductInformation.SuspendLayout();
@@ -148,8 +148,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(53)))), ((int)(((byte)(80)))));
-            this.panel2.Controls.Add(this.lblPoints);
-            this.panel2.Controls.Add(this.lblMoney);
+            this.panel2.Controls.Add(this.lblPointsUser);
+            this.panel2.Controls.Add(this.lblMoneyUser);
             this.panel2.Controls.Add(this.lblRoundNumber);
             this.panel2.Controls.Add(this.lblAuctionNumber);
             this.panel2.Controls.Add(this.label5);
@@ -163,39 +163,39 @@
             this.panel2.Size = new System.Drawing.Size(1026, 70);
             this.panel2.TabIndex = 1;
             // 
-            // lblPoints
+            // lblPointsUser
             // 
-            this.lblPoints.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblPointsUser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPoints.AutoSize = true;
-            this.lblPoints.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblPoints.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPoints.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblPoints.Location = new System.Drawing.Point(885, 31);
-            this.lblPoints.Name = "lblPoints";
-            this.lblPoints.Size = new System.Drawing.Size(54, 31);
-            this.lblPoints.TabIndex = 8;
-            this.lblPoints.Text = "000";
-            this.lblPoints.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPointsUser.AutoSize = true;
+            this.lblPointsUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPointsUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblPointsUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPointsUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblPointsUser.Location = new System.Drawing.Point(885, 31);
+            this.lblPointsUser.Name = "lblPointsUser";
+            this.lblPointsUser.Size = new System.Drawing.Size(54, 31);
+            this.lblPointsUser.TabIndex = 8;
+            this.lblPointsUser.Text = "000";
+            this.lblPointsUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblMoney
+            // lblMoneyUser
             // 
-            this.lblMoney.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lblMoneyUser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMoney.AutoSize = true;
-            this.lblMoney.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblMoney.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lblMoney.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoney.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblMoney.Location = new System.Drawing.Point(648, 34);
-            this.lblMoney.Name = "lblMoney";
-            this.lblMoney.Size = new System.Drawing.Size(86, 31);
-            this.lblMoney.TabIndex = 7;
-            this.lblMoney.Text = "000.00";
-            this.lblMoney.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblMoneyUser.AutoSize = true;
+            this.lblMoneyUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMoneyUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblMoneyUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMoneyUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblMoneyUser.Location = new System.Drawing.Point(648, 34);
+            this.lblMoneyUser.Name = "lblMoneyUser";
+            this.lblMoneyUser.Size = new System.Drawing.Size(86, 31);
+            this.lblMoneyUser.TabIndex = 7;
+            this.lblMoneyUser.Text = "000.00";
+            this.lblMoneyUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblRoundNumber
             // 
@@ -300,7 +300,7 @@
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(53)))), ((int)(((byte)(80)))));
             this.panel3.Controls.Add(this.pboxDecrementValueOffer);
             this.panel3.Controls.Add(this.pboxIncreaseValueOffer);
-            this.panel3.Controls.Add(this.pboDecrementBid);
+            this.panel3.Controls.Add(this.pboxDecrementBid);
             this.panel3.Controls.Add(this.pboxIncreaseBid);
             this.panel3.Controls.Add(this.txbIncreaseOffert);
             this.panel3.Controls.Add(this.txbOffer);
@@ -337,17 +337,17 @@
             this.pboxIncreaseValueOffer.Click += new System.EventHandler(this.pboxIncreaseValueOffer_Click);
             this.pboxIncreaseValueOffer.DoubleClick += new System.EventHandler(this.pboxIncreaseValueOffer_Click);
             // 
-            // pboDecrementBid
+            // pboxDecrementBid
             // 
-            this.pboDecrementBid.Image = global::AuctionGame_User.Properties.Resources.bajar_2_;
-            this.pboDecrementBid.Location = new System.Drawing.Point(269, 51);
-            this.pboDecrementBid.Name = "pboDecrementBid";
-            this.pboDecrementBid.Size = new System.Drawing.Size(30, 30);
-            this.pboDecrementBid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pboDecrementBid.TabIndex = 13;
-            this.pboDecrementBid.TabStop = false;
-            this.pboDecrementBid.Click += new System.EventHandler(this.pboDecrementBid_Click);
-            this.pboDecrementBid.DoubleClick += new System.EventHandler(this.pboDecrementBid_Click);
+            this.pboxDecrementBid.Image = global::AuctionGame_User.Properties.Resources.bajar_2_;
+            this.pboxDecrementBid.Location = new System.Drawing.Point(269, 51);
+            this.pboxDecrementBid.Name = "pboxDecrementBid";
+            this.pboxDecrementBid.Size = new System.Drawing.Size(30, 30);
+            this.pboxDecrementBid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboxDecrementBid.TabIndex = 13;
+            this.pboxDecrementBid.TabStop = false;
+            this.pboxDecrementBid.Click += new System.EventHandler(this.pboxDecrementBid_Click);
+            this.pboxDecrementBid.DoubleClick += new System.EventHandler(this.pboxDecrementBid_Click);
             // 
             // pboxIncreaseBid
             // 
@@ -558,7 +558,7 @@
             this.panel4.Controls.Add(this.label6);
             this.panel4.Controls.Add(this.label22);
             this.panel4.Controls.Add(this.pboxCurrentProduct);
-            this.panel4.Controls.Add(this.lblPointsProductOfferded);
+            this.panel4.Controls.Add(this.lblCurrentPointsProduct);
             this.panel4.Controls.Add(this.label17);
             this.panel4.Controls.Add(this.lblCurrentPriceProduct);
             this.panel4.Controls.Add(this.label19);
@@ -621,17 +621,17 @@
             this.pboxCurrentProduct.TabIndex = 24;
             this.pboxCurrentProduct.TabStop = false;
             // 
-            // lblPointsProductOfferded
+            // lblCurrentPointsProduct
             // 
-            this.lblPointsProductOfferded.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblPointsProductOfferded.AutoSize = true;
-            this.lblPointsProductOfferded.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPointsProductOfferded.ForeColor = System.Drawing.Color.Snow;
-            this.lblPointsProductOfferded.Location = new System.Drawing.Point(130, 327);
-            this.lblPointsProductOfferded.Name = "lblPointsProductOfferded";
-            this.lblPointsProductOfferded.Size = new System.Drawing.Size(17, 23);
-            this.lblPointsProductOfferded.TabIndex = 23;
-            this.lblPointsProductOfferded.Text = "-";
+            this.lblCurrentPointsProduct.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblCurrentPointsProduct.AutoSize = true;
+            this.lblCurrentPointsProduct.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentPointsProduct.ForeColor = System.Drawing.Color.Snow;
+            this.lblCurrentPointsProduct.Location = new System.Drawing.Point(130, 327);
+            this.lblCurrentPointsProduct.Name = "lblCurrentPointsProduct";
+            this.lblCurrentPointsProduct.Size = new System.Drawing.Size(17, 23);
+            this.lblCurrentPointsProduct.TabIndex = 23;
+            this.lblCurrentPointsProduct.Text = "-";
             // 
             // label17
             // 
@@ -758,7 +758,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmGame";
             this.Text = "|";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmGame_FormClosing);
             this.Load += new System.EventHandler(this.FrmGame_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -769,7 +768,7 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxDecrementValueOffer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxIncreaseValueOffer)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pboDecrementBid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxDecrementBid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxIncreaseBid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxBid)).EndInit();
             this.pnlProductInformation.ResumeLayout(false);
@@ -789,8 +788,8 @@
         private System.Windows.Forms.PictureBox pboxCloseForm;
         private System.Windows.Forms.Label txbClock;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label lblPoints;
-        private System.Windows.Forms.Label lblMoney;
+        private System.Windows.Forms.Label lblPointsUser;
+        private System.Windows.Forms.Label lblMoneyUser;
         private System.Windows.Forms.Label lblRoundNumber;
         private System.Windows.Forms.Label lblAuctionNumber;
         private System.Windows.Forms.Label label5;
@@ -817,7 +816,7 @@
         private System.Windows.Forms.PictureBox pboxBid;
         private System.Windows.Forms.PictureBox pboxDecrementValueOffer;
         private System.Windows.Forms.PictureBox pboxIncreaseValueOffer;
-        private System.Windows.Forms.PictureBox pboDecrementBid;
+        private System.Windows.Forms.PictureBox pboxDecrementBid;
         private System.Windows.Forms.PictureBox pboxIncreaseBid;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label13;
@@ -825,7 +824,7 @@
         private System.Windows.Forms.TextBox txbLastOfferPlayer;
         private System.Windows.Forms.TextBox txbLastOffer;
         private System.Windows.Forms.PictureBox pboxCurrentProduct;
-        private System.Windows.Forms.Label lblPointsProductOfferded;
+        private System.Windows.Forms.Label lblCurrentPointsProduct;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label lblCurrentPriceProduct;
         private System.Windows.Forms.Label label19;

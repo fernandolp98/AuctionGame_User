@@ -23,26 +23,8 @@ namespace AuctionGame_User
 
         private User _player;
 
-        //private int initialMinutes =0, initialSeconds = 15;
-        //private int predeterminatedMinutes, predeterminatedSeconds;
-        //private int seconds, minutes;
 
-        //private int _currentProductIndex;
-        //private Product _currentProduct;
-
-        private decimal _lastOffert;
-        //private int _roundActivity;
-        //private int _round;
-
-        //private int _currentWinner;
-
-        private bool _activeAuction;
-
-        //private string log;
-
-        //private bool firstBidd = true;
-
-        private string _namePlayer;
+        private readonly string _namePlayer;
 
         public FrmGame(string namePlayer)
         {
@@ -61,7 +43,7 @@ namespace AuctionGame_User
 
             if (TcpConnection.Connectar(Ipaddress, Port))
             {
-                var package = new Package("newUser", _namePlayer);
+                var package = new Package("newConnection", _namePlayer);
                 TcpConnection.EnviarPaquete(package);
             }
             else
@@ -73,46 +55,130 @@ namespace AuctionGame_User
         }
         private void MensajeRecibido(string datos)
         {
-            var paquete = new Package(datos);
-            var comando = paquete.Command;
-            if (comando == "connectionResultOk") //Se recibe información del juego idUser|idRutina|tiempoInicial
+            var package = new Package(datos);
+            var command = package.Command;
+            switch (command)
             {
-                var contenido = paquete.Content;
-                var values = Map.Deserialize(contenido);
-                _player = User.GetUserById(int.Parse(values[0]));
-                var routine = Routine.GetRoutineById(int.Parse(values[1]));
+                case "connectionResult":
+                    ConnectionResult(package.Content);
+                    break;
+                case "bidResult":
+                    BidResult(package.Content);
+                    break;
+                case "newAuction":
+                    NewAuctionUpdate(package.Content);
+                    break;
+                case "updateBidd":
+                {
+                    var values = Map.Deserialize(package.Content);
+                    Invoke(new Action(() =>
+                    {
+                        txbCurrentWinner.Text = values[0];
+                        txbLastOffer.Text = values[1];
+                    }));
+                    break;
+                }
+                case "updateClock":
+                    UpdateClock(package.Content);
+                    break;
+                case "auctionFinished":
+                    AuctionFinished(package.Content);
+                    break;
+
+                default: 
+                    Console.WriteLine($@"Mensaje con comando desconocido: {command}");
+                    break;
+            }
+        }
+
+        private void ConnectionResult(string content)
+        {
+            var values = Map.Deserialize(content);
+            var result = bool.Parse(values[0]);
+            if (result)
+            {
+                _player = User.GetUserById(int.Parse(values[1]));
+                var routine = Routine.GetRoutineById(int.Parse(values[2]));
                 _products = routine.AllProducts;
                 _families = routine.Families;
                 _virtualBidders = routine.VirtualBidders;
-                var time = new Time(values[2], "ss");
+                var time = new Time(values[3], "ss");
 
 
                 Invoke(new Action(() =>
                 {
                     lblPlayerName.Text = _player.NameBidder;
-                    lblMoney.Text = _player.Wallet.ToString(CultureInfo.InvariantCulture);
+                    lblMoneyUser.Text = _player.Wallet.ToString(CultureInfo.InvariantCulture);
                     txbClock.Text = time.Format("mm:ss");
                     LoadProducts();
                     LoadFamilies();
                 }));
             }
-            if (comando == "biddOk")
+            else
+            {
+                MessageBox.Show($@"El servidor rechazó la conexión: {values[1]}");
+                Environment.Exit(0);
+            }
+        }
+
+        private void BidResult(string content)
+        {
+            var values = Map.Deserialize(content);
+            var result = bool.Parse(values[0]);
+            if (result)
             {
                 Invoke(new Action(() =>
                 {
-                    txbLastOfferPlayer.Text = paquete.Content;
-
+                    txbLastOfferPlayer.Text = txbLastOffer.Text = values[1];
+                    txbCurrentWinner.Text = _player.IdBidder.ToString();
                 }));
             }
-
-            if (comando == "updateBidd")
+            else
             {
-                var values = Map.Deserialize(paquete.Content);
+                MessageBox.Show($@"La oferta fue rechazada: {values[1]}");
+            }
+        }
+
+        private void NewAuctionUpdate(string content)
+        {
+            var values = Map.Deserialize(content);
+            var product = Product.GetProductById(int.Parse(values[1]));
+
+            Invoke(new Action(() =>
+            {
+                lblAuctionNumber.Text = values[0];
+                lblRoundNumber.Text = @"1";
+                lblCurrentNameProduct.Text = product.Name;
+                lblCurrentPriceProduct.Text = product.Price.ToString(CultureInfo.InvariantCulture);
+                lblCurrentPointsProduct.Text = product.Points.ToString(CultureInfo.InvariantCulture);
+                pboxCurrentProduct.Image = product.ImageProduct;
+                txbCurrentWinner.Text = @"-";
+                txbLastOffer.Text = @"000";
+            }));
+        }
+
+        private void UpdateClock(string content)
+        {
+            var values = Map.Deserialize(content);
+            Invoke( new Action(() => { txbClock.Text = values[0]; }));
+        }
+
+        private void AuctionFinished(string content)
+        {
+            var values = Map.Deserialize(content);
+            var result = bool.Parse(values[0]);
+            if (result)
+            {
+                MessageBox.Show(@"¡Has ganado la subasta!");
                 Invoke(new Action(() =>
                 {
-                    txbCurrentWinner.Text = values[0];
-                    txbLastOffer.Text = values[1];
+                    lblPointsUser.Text = values[1];
+                    lblMoneyUser.Text = values[2];
                 }));
+            }
+            else
+            {
+                MessageBox.Show(@"Has perdido la subasta");
             }
         }
         private void AddProductsToPanel(List<Product> products, Panel panel)
@@ -240,12 +306,6 @@ namespace AuctionGame_User
             pboxProduct.Image = product.ImageProduct;
             pnlProductInformation.Visible = true;
         }
-
-        private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            finishGame();
-        }
-
         private void pboxIncreaseValueOffer_Click(object sender, EventArgs e)
         {
             var currentValue = int.Parse(txbIncreaseOffert.Text);
@@ -282,7 +342,7 @@ namespace AuctionGame_User
                 txbOffer.Text = currentValue.ToString();
         }
 
-        private void pboDecrementBid_Click(object sender, EventArgs e)
+        private void pboxDecrementBid_Click(object sender, EventArgs e)
         {
             var currentValue = int.Parse(txbOffer.Text);
             if (currentValue == 0) return;
@@ -301,8 +361,7 @@ namespace AuctionGame_User
             //if (!_activeAuction) return;
 
             var newOffer = decimal.Parse(txbOffer.Text);
-
-            var package = new Package("newBidd", newOffer.ToString(CultureInfo.InvariantCulture));
+            var package = new Package("newBid", newOffer.ToString(CultureInfo.InvariantCulture));
             TcpConnection.EnviarPaquete(package);
         }
 

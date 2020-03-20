@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace AuctionGame_User
 {
@@ -16,7 +11,6 @@ namespace AuctionGame_User
 
         public User()
         {
-
             Statistics = new Statistical();
             ProductsEarned = new List<Product>();
         }
@@ -34,7 +28,6 @@ namespace AuctionGame_User
                 user.Wallet = (decimal)userDt.Rows[0][3];
                 user.Statistics.IdStatistical = (int)userDt.Rows[0][4];
             }
-
             return user;
         }
 
