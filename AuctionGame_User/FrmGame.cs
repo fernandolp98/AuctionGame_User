@@ -66,25 +66,23 @@ namespace AuctionGame_User
                     BidResult(package.Content);
                     break;
                 case "newAuction":
-                    NewAuctionUpdate(package.Content);
+                    NewAuction(package.Content);
+                    break;
+                case "newRound":
+                    NewRound(package.Content);
                     break;
                 case "updateBidd":
-                {
-                    var values = Map.Deserialize(package.Content);
-                    Invoke(new Action(() =>
-                    {
-                        txbCurrentWinner.Text = values[0];
-                        txbLastOffer.Text = values[1];
-                    }));
+                    UpdateBid(package.Content);
                     break;
-                }
                 case "updateClock":
                     UpdateClock(package.Content);
                     break;
                 case "auctionFinished":
                     AuctionFinished(package.Content);
                     break;
-
+                case "outBidder":
+                    MessageBox.Show(@"Estás fuera de la subasta por no haber participado en la ronda anterior");
+                    break;
                 default: 
                     Console.WriteLine($@"Mensaje con comando desconocido: {command}");
                     break;
@@ -139,7 +137,7 @@ namespace AuctionGame_User
             }
         }
 
-        private void NewAuctionUpdate(string content)
+        private void NewAuction(string content)
         {
             var values = Map.Deserialize(content);
             var product = Product.GetProductById(int.Parse(values[1]));
@@ -154,6 +152,21 @@ namespace AuctionGame_User
                 pboxCurrentProduct.Image = product.ImageProduct;
                 txbCurrentWinner.Text = @"-";
                 txbLastOffer.Text = @"000";
+            }));
+        }
+
+        private void NewRound(string content)
+        {
+            var values = Map.Deserialize(content);
+            Invoke(new Action(() => { lblRoundNumber.Text = values[0]; }));
+        }
+        private void UpdateBid(string content)
+        {
+            var values = Map.Deserialize(content);
+            Invoke(new Action(() =>
+            {
+                txbCurrentWinner.Text = values[0];
+                txbLastOffer.Text = values[1];
             }));
         }
 
