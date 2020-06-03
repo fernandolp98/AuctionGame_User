@@ -11,6 +11,9 @@ namespace AuctionGame_User
         private static readonly Font FontRegular = new Font("Comic Sans MS", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         private readonly DataControl _dataControl = new DataControl(FontPlaceHolder, FontRegular, Color.DimGray, Color.DimGray, Color.Red);
 
+        private static readonly  TcpConnection TcpConnection = new TcpConnection();
+        private static readonly string Ipaddress = "127.0.0.1";
+        private const int Port = 1698;
         public FrmMainMenu()
         {
             InitializeComponent();
@@ -42,10 +45,18 @@ namespace AuctionGame_User
         private void btnPlay_Click(object sender, EventArgs e)
         {
             if (!ValidData()) return;
-            var game = new FrmGame(txbName.Text);
-            Hide();
-            game.ShowDialog();
-            Show();
+            if (TcpConnection.Connectar(Ipaddress, Port))
+            {
+                var game = new FrmGame(TcpConnection, txbName.Text);
+                Hide();
+                game.ShowDialog();
+                Show();
+            }
+            else
+            {
+                MessageBox.Show(@"¡Error conectando con el servidor! ");
+            }
+
         }
 
         private void txbName_Validated(object sender, EventArgs e)

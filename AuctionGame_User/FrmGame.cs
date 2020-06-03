@@ -10,14 +10,14 @@ namespace AuctionGame_User
 {
     public partial class FrmGame : Form
     {
-        private static readonly TcpConnection TcpConnection = new TcpConnection();
-        private static readonly string Ipaddress = "127.0.0.1";
-        private const int Port = 1698;
+        private static TcpConnection TcpConnection;
+
 
         private int _xclick, _yclick;
-        readonly Font _font = new Font(new FontFamily("Comic Sans MS"), 14, FontStyle.Regular);
+        public readonly Font _font = new Font(new FontFamily("Comic Sans MS"), 14, FontStyle.Regular);
 
         private List<Product> _products;
+        private List<Label> _lblProducts;
         private List<Family> _families;
         private List<VirtualBidder> _virtualBidders;
 
@@ -31,6 +31,12 @@ namespace AuctionGame_User
             InitializeComponent();
             _namePlayer = namePlayer;
         }
+        public FrmGame(TcpConnection tcpConnection, string namePlayer)
+        {
+            InitializeComponent();
+            _namePlayer = namePlayer;
+            TcpConnection = tcpConnection;
+        }
 
         private void pboxCloseForm_Click(object sender, EventArgs e)
         {
@@ -40,18 +46,8 @@ namespace AuctionGame_User
         private void FrmGame_Load(object sender, EventArgs e)
         {
             TcpConnection.OnDataRecieved += MensajeRecibido;
-
-            if (TcpConnection.Connectar(Ipaddress, Port))
-            {
-                var package = new Package("newConnection", _namePlayer);
-                TcpConnection.EnviarPaquete(package);
-            }
-            else
-            {
-                MessageBox.Show(@"¡Error conectando con el servidor! ");
-                this.Close();
-            }
-
+            var package = new Package("newConnection", _namePlayer);
+            TcpConnection.EnviarPaquete(package);
         }
         private void MensajeRecibido(string datos)
         {
@@ -83,6 +79,9 @@ namespace AuctionGame_User
                 case "outBidder":
                     MessageBox.Show(@"Estás fuera de la subasta por no haber participado en la ronda anterior");
                     break;
+                case "familyEarned":
+                    MessageBox.Show(package.Content);
+                    break;
                 default: 
                     Console.WriteLine($@"Mensaje con comando desconocido: {command}");
                     break;
@@ -98,10 +97,10 @@ namespace AuctionGame_User
                 _player = User.GetUserById(int.Parse(values[1]));
                 var routine = Routine.GetRoutineById(int.Parse(values[2]));
                 _products = routine.AllProducts;
+                _lblProducts = new List<Label>();
                 _families = routine.Families;
                 _virtualBidders = routine.VirtualBidders;
                 var time = new Time(values[3], "ss");
-
 
                 Invoke(new Action(() =>
                 {
@@ -180,27 +179,43 @@ namespace AuctionGame_User
         {
             var values = Map.Deserialize(content);
             var result = bool.Parse(values[0]);
+            Label currentLbl = null;
+            foreach (var lbl in _lblProducts)
+            {
+                if (lbl.Tag.ToString() != values[3]) continue;
+                currentLbl = lbl;
+                break;
+            }
             if (result)
             {
-                MessageBox.Show(@"¡Has ganado la subasta!");
                 Invoke(new Action(() =>
                 {
+                    MessageBox.Show(@"¡Has ganado la subasta!");
+                    if (currentLbl != null) currentLbl.ForeColor = Color.Green;
                     lblPointsUser.Text = values[1];
                     lblMoneyUser.Text = values[2];
                 }));
             }
             else
             {
-                MessageBox.Show(@"Has perdido la subasta");
+                Invoke(new Action(() =>
+                {
+                    MessageBox.Show(@"Has perdido la subasta");
+                    if (currentLbl != null) currentLbl.ForeColor = Color.Red;
+                    lblPointsUser.Text = values[1];
+                    lblMoneyUser.Text = values[2];
+                }));
             }
         }
         private void AddProductsToPanel(List<Product> products, Panel panel)
         {
+            if (products == null) throw new ArgumentNullException(nameof(products));
+            if (panel == null) throw new ArgumentNullException(nameof(panel));
             for (var index = products.Count - 1; index >= 0; index--)
             {
                 var product = products[index];
 
-                var nameProduct = new Label()
+                var nameProduct = new Label
                 {
                     Text = $@"{product.Name}",
                     Dock = DockStyle.Top,
@@ -209,7 +224,8 @@ namespace AuctionGame_User
                     TextAlign = ContentAlignment.BottomCenter,
                     BackColor = Color.Transparent,
                     Font = _font,
-                    ForeColor = Color.Azure
+                    ForeColor = Color.Azure,
+                    Tag = product.IdProduct
                 };
                 var pbox = new PictureBox
                 {
@@ -226,13 +242,14 @@ namespace AuctionGame_User
                 {
                     pbox, nameProduct
                 };
+                _lblProducts.Add(nameProduct);
                 panel.Controls.AddRange(o);
             }
         }
         private void LoadProducts()
         {
             AddProductsToPanel(_products, pnlProducts);
-            pnlProducts.Controls.Add(new Label()
+            pnlProducts.Controls.Add(new Label
             {
                 Text = $@"Productos",
                 Dock = DockStyle.Top,
@@ -243,7 +260,6 @@ namespace AuctionGame_User
                 Font = _font,
                 ForeColor = Color.Yellow
             });
-            pnlProducts.VerticalScroll.Visible = false;
         }
         private void LoadFamilies()
         {
@@ -310,8 +326,6 @@ namespace AuctionGame_User
         protected virtual void Pbox_Click(object o, EventArgs e)
         {
             var pbox = (PictureBox)o;
-            var lbl = (Label)((object[])pbox.Tag)[1];
-            lbl.ForeColor = Color.Red;
             var product = (Product)((object[])pbox.Tag)[0];
             lblNameProduct.Text = product.Name;
             lblInitialPrice.Text = product.Price.ToString(CultureInfo.CurrentCulture);
@@ -324,9 +338,9 @@ namespace AuctionGame_User
             var currentValue = int.Parse(txbIncreaseOffert.Text);
             currentValue++;
             if (currentValue < 10)
-                txbIncreaseOffert.Text = "00" + currentValue;
+                txbIncreaseOffert.Text = @"00" + currentValue;
             else if(currentValue < 100)
-                txbIncreaseOffert.Text = "0" + currentValue;
+                txbIncreaseOffert.Text = @"0" + currentValue;
             else
                 txbIncreaseOffert.Text = currentValue.ToString();
         }

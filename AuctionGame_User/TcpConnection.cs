@@ -55,7 +55,7 @@ namespace AuctionGame_User
                 {
                     if (lector.EndOfStream)
                         break;
-                    int charCode = lector.Read();
+                    var charCode = lector.Read();
                     if (charCode == -1)
                         break;
                     if (charCode != 0)
@@ -77,14 +77,12 @@ namespace AuctionGame_User
                 }
                 catch (Exception e)
                 {
-                    if (OnError != null)
-                        OnError(e);
-
+                    OnError?.Invoke(e);
                     break;
                 }
             } while (true);
-            if (OnDisconnect != null)
-                OnDisconnect();
+
+            OnDisconnect?.Invoke();
         }
         private void EscribirMsj(string mensaje)
         {
